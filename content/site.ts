@@ -1,0 +1,64 @@
+export const siteConfig = {
+  name: "ACES Nationals Football Tournament",
+  tagline: "Play The Best",
+  description:
+    "The ACES Nationals is an invitation-only junior football tournament bringing elite boys and girls teams from across the country to Nottingham.",
+  url: "https://acesfootball.co.uk",
+  contact: {
+    email: "info@acesfootball.co.uk",
+    phone: "07557 095 656",
+    address: "Riverside Sports Complex, Trent Side, Nottingham, NG7 2SA",
+    venue: "University of Nottingham's Riverside Sports Complex, Lenton Lane NG7 2SA",
+  },
+  social: {
+    instagram: "https://www.instagram.com/acesnationals/",
+    youtube: "https://www.youtube.com/channel/UCVYKAiI6Pm7USGyjpUyetXw",
+    twitter: "https://x.com/acesfootballuk",
+    facebook: "https://www.facebook.com/acesfootball",
+  },
+} as const;
+
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+export const mainNav: NavItem[] = [
+  { label: "Home", href: "/" },
+  {
+    label: "2026 Tournament",
+    href: "/tournament",
+    children: [
+      { label: "The 2026 Tournament", href: "/tournament" },
+      { label: "Register Interest", href: "/tournament/register" },
+      { label: "Entry Criteria", href: "/tournament/entry-criteria" },
+      { label: "Rules", href: "/tournament/rules" },
+      { label: "About us", href: "/tournament/about" },
+    ],
+  },
+  { label: "News", href: "/news" },
+  {
+    label: "Tournament Videos",
+    href: "/videos",
+    children: [
+      { label: "2025 Tournament Video", href: "/videos/2025" },
+      { label: "2024 Tournament Video", href: "/videos/2024" },
+      { label: "2023 Tournament Video", href: "/videos/2023" },
+    ],
+  },
+  { label: "Hall of Fame", href: "/hall-of-fame" },
+  { label: "ACES Shop", href: "/shop" },
+  { label: "Contact", href: "/contact" },
+];
+
+export const policyLinks = [
+  { label: "Lost Child Procedure", slug: "lost-child-procedure" },
+  { label: "Risk Assessment", slug: "risk-assessment" },
+  { label: "Safeguarding Policy & Procedures", slug: "safeguarding" },
+  { label: "Complaints Procedure", slug: "complaints" },
+  { label: "Terms and Conditions", slug: "terms" },
+  { label: "Privacy and cookie policy", slug: "privacy" },
+];
+
+export const footerNav = mainNav;
