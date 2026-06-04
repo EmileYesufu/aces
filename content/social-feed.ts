@@ -7,11 +7,4 @@ export const socialFeedConfig = {
     embedUrl: "https://www.instagram.com/acesnationals/embed",
     embedHeight: 560,
   },
-  x: {
-    username: "acesfootballuk",
-    profileUrl: "https://x.com/acesfootballuk",
-    displayName: "@acesfootballuk",
-    embedHeight: 520,
-    tweetLimit: 5,
-  },
 } as const;

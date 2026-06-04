@@ -99,7 +99,7 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 - Entry journey section and accessible multi-step register form
 - Hall of Fame champion spotlight and mobile-friendly year pills
 - Testimonials carousel with pause control
-- Live Instagram and X profile embeds from [@acesnationals](https://www.instagram.com/acesnationals/) and [@acesfootballuk](https://x.com/acesfootballuk)
+- Live Instagram profile embed from [@acesnationals](https://www.instagram.com/acesnationals/)
 - Scroll animations, mobile sticky CTA bar, sitemap/robots, and Event JSON-LD
 
 ## Notes

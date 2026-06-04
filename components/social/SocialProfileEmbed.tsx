@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 type SocialProfileEmbedProps = {
-  platform: "Instagram" | "X";
+  platform: string;
   displayName: string;
   profileUrl: string;
   embedUrl: string;

@@ -1,19 +1,17 @@
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { InstagramFeed } from "@/components/social/InstagramFeed";
-import { XFeed } from "@/components/social/XFeed";
 
 export function SocialFeedSection() {
   return (
     <Section className="bg-surface bg-pitch-pattern">
       <SectionHeader
         title="Follow the ACES"
-        subtitle="Live feeds from Instagram and X — always up to date from each platform"
+        subtitle="Live updates from Instagram — tournament news, highlights, and behind-the-scenes"
         centered
       />
 
-      <div className="grid gap-12 lg:grid-cols-2">
+      <div className="mx-auto max-w-2xl">
         <InstagramFeed />
-        <XFeed />
       </div>
     </Section>
   );

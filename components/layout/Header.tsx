@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Mail, Phone, MapPin } from "lucide-react";
 import { mainNav, siteConfig } from "@/content/site";
-import { InstagramIcon, YoutubeIcon, FacebookIcon, XIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -70,9 +70,6 @@ export function Header() {
             </a>
             <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-white transition-colors">
               <YoutubeIcon className="h-4 w-4" />
-            </a>
-            <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="X" className="hover:text-white transition-colors">
-              <XIcon className="h-4 w-4" />
             </a>
             <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
               <FacebookIcon className="h-4 w-4" />

@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/content/site";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { InstagramIcon, YoutubeIcon, FacebookIcon, XIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { SocialFeedSection } from "@/components/home/SocialFeed";
 
 export const metadata: Metadata = {
@@ -64,9 +64,6 @@ export default function ContactPage() {
                 </a>
                 <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="rounded-full bg-gray-100 p-3 text-aces-navy hover:bg-aces-red hover:text-white transition-colors">
                   <YoutubeIcon className="h-5 w-5" />
-                </a>
-                <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="X" className="rounded-full bg-gray-100 p-3 text-aces-navy hover:bg-aces-red hover:text-white transition-colors">
-                  <XIcon className="h-5 w-5" />
                 </a>
                 <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full bg-gray-100 p-3 text-aces-navy hover:bg-aces-red hover:text-white transition-colors">
                   <FacebookIcon className="h-5 w-5" />
