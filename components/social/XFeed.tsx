@@ -37,7 +37,6 @@ export function XFeed() {
           screenName={x.username}
           profileUrl={x.profileUrl}
           height={x.timelineHeight}
-          tweetLimit={5}
         />
       </div>
     </div>

@@ -4,18 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { InstagramIcon } from "@/components/ui/SocialIcons";
-import { InstagramEmbedGrid } from "@/components/social/InstagramEmbedGrid";
 import { socialFeedConfig } from "@/content/social-feed";
 import type { InstagramPost } from "@/lib/instagram";
 
 type InstagramFeedProps = {
   posts: InstagramPost[];
-  embedUrls: string[];
 };
 
-export function InstagramFeed({ posts, embedUrls }: InstagramFeedProps) {
+export function InstagramFeed({ posts }: InstagramFeedProps) {
   const { instagram } = socialFeedConfig;
-  const postsWithImages = posts.filter((p) => p.thumbnail);
 
   return (
     <div>
@@ -40,38 +37,29 @@ export function InstagramFeed({ posts, embedUrls }: InstagramFeedProps) {
         </Link>
       </div>
 
-      {postsWithImages.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2">
-          {postsWithImages.map((post) => (
-            <Link
-              key={post.id}
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-aces-red/30 hover:shadow-md"
-            >
-              <div className="relative aspect-square overflow-hidden bg-gray-100">
-                <Image
-                  src={post.thumbnail}
-                  alt={post.caption.slice(0, 100) || "Instagram post from ACES Nationals"}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-aces-navy/0 transition-colors group-hover:bg-aces-navy/20" />
-              </div>
-              {post.caption && (
-                <div className="p-4">
-                  <p className="line-clamp-3 text-sm text-aces-muted">{post.caption}</p>
-                </div>
-              )}
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <InstagramEmbedGrid postUrls={embedUrls} />
-      )}
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3">
+        {posts.map((post) => (
+          <Link
+            key={post.id}
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100 ring-1 ring-gray-200 transition-all hover:ring-aces-red/40 hover:shadow-md"
+          >
+            <Image
+              src={post.thumbnail}
+              alt={post.caption || "Instagram post from ACES Nationals"}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, 200px"
+            />
+            <div className="absolute inset-0 bg-aces-navy/0 transition-colors group-hover:bg-aces-navy/25" />
+            <span className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 opacity-0 shadow transition-opacity group-hover:opacity-100">
+              <InstagramIcon className="h-4 w-4 text-aces-navy" aria-hidden="true" />
+            </span>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
