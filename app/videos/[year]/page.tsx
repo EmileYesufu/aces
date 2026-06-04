@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
+import { VideoEmbed } from "@/components/ui/VideoEmbed";
 import { tournamentVideos, getVideoByYear } from "@/content/videos";
 
 type Props = {
@@ -41,7 +41,7 @@ export default async function VideoYearPage({ params }: Props) {
       <Section>
         <div className="mx-auto max-w-4xl">
           <div className="aspect-video overflow-hidden rounded-xl bg-black">
-            <YouTubeEmbed id={video.youtubeId} title={video.title} />
+            <VideoEmbed provider={video.provider} id={video.videoId} title={video.title} />
           </div>
           <Link href="/videos" className="mt-8 inline-block font-semibold text-aces-red hover:underline">
             ← Back to all videos

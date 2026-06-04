@@ -45,6 +45,7 @@ export const mainNav: NavItem[] = [
       { label: "2025 Tournament Video", href: "/videos/2025" },
       { label: "2024 Tournament Video", href: "/videos/2024" },
       { label: "2023 Tournament Video", href: "/videos/2023" },
+      { label: "2022 Tournament Video", href: "/videos/2022" },
     ],
   },
   { label: "Hall of Fame", href: "/hall-of-fame" },

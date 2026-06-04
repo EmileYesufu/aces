@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { tournamentVideos, getYoutubeThumbnail } from "@/content/videos";
+import { tournamentVideos, getVideoThumbnail } from "@/content/videos";
 import { Play } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -25,14 +25,14 @@ export default function VideosPage() {
       />
 
       <Section>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {tournamentVideos.map((video, i) => (
             <ScrollReveal key={video.year} delay={i * 0.1}>
               <Link href={`/videos/${video.year}`}>
                 <div className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition-all hover:-translate-y-1 hover:border-aces-red/30 hover:shadow-md">
                   <div className="relative aspect-video">
                     <Image
-                      src={getYoutubeThumbnail(video.youtubeId)}
+                      src={getVideoThumbnail(video)}
                       alt={video.title}
                       fill
                       className="object-cover"

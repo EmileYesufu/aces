@@ -74,7 +74,7 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | `/news` | News listing |
 | `/news/[slug]` | News article detail |
 | `/videos` | Tournament video hub |
-| `/videos/[year]` | Individual video embed (2023–2025) |
+| `/videos/[year]` | Individual video embed (2022–2025) |
 | `/hall-of-fame` | Winners archive 2009–2025 (filterable) |
 | `/shop` | ACES Shop placeholder |
 | `/contact` | Contact details and map |
@@ -105,5 +105,5 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 ## Notes
 
 - Register Interest form validates client-side and shows a success message — no backend submission.
-- YouTube video IDs are in `content/videos.ts`; replace with actual ACES channel IDs if needed.
+- Tournament video IDs (YouTube + Vimeo) are in `content/videos.ts`; re-scrape with `node scripts/scrape-tournament-videos.mjs`.
 - Shop page links to the existing external ACES shop.

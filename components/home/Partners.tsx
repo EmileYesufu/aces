@@ -2,9 +2,9 @@ import Image from "next/image";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Button } from "@/components/ui/Button";
-import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
+import { VideoEmbed } from "@/components/ui/VideoEmbed";
 import { partners } from "@/content/partners";
-import { featuredVideoId } from "@/content/videos";
+import { featuredVideo } from "@/content/videos";
 
 export function Partners() {
   return (
@@ -62,7 +62,11 @@ export function VideoSection() {
         </ScrollReveal>
         <ScrollReveal delay={0.15}>
           <div className="aspect-video overflow-hidden rounded-xl bg-black/40 shadow-2xl ring-1 ring-white/10">
-            <YouTubeEmbed id={featuredVideoId} title="A Day at the ACES" />
+            <VideoEmbed
+              provider={featuredVideo.provider}
+              id={featuredVideo.videoId}
+              title={featuredVideo.title}
+            />
           </div>
         </ScrollReveal>
       </div>

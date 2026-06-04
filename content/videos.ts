@@ -1,31 +1,52 @@
+export type VideoProvider = "youtube" | "vimeo";
+
 export type TournamentVideo = {
   year: string;
   title: string;
   description: string;
-  youtubeId: string;
+  provider: VideoProvider;
+  videoId: string;
 };
 
-/** Featured video used on homepage and as default highlight */
-export const featuredVideoId = "238EECInrJA";
+/** Homepage “A Day at the ACES” — matches acesfootball.co.uk homepage embed */
+export const featuredVideo = {
+  provider: "youtube" as const,
+  videoId: "vgplbpfPUS4",
+  title: "A Day at the ACES",
+};
 
+/** @deprecated Use featuredVideo.videoId */
+export const featuredVideoId = featuredVideo.videoId;
+
+/** Scraped from acesfootball.co.uk/{year}-tournament-video/ */
 export const tournamentVideos: TournamentVideo[] = [
   {
     year: "2025",
-    title: "2025 Tournament Video",
-    description: "Highlights from the 2025 ACES Nationals tournament at Riverside Sports Complex.",
-    youtubeId: "yqeb_X5F0sw",
+    title: "ACES National 2025",
+    description: "Official highlights from the 2025 ACES Nationals tournament.",
+    provider: "vimeo",
+    videoId: "1126324139",
   },
   {
     year: "2024",
-    title: "2024 Tournament Video",
+    title: "ACES Nationals 2024",
     description: "Relive the action from the 2024 ACES Nationals — the sixteenth anniversary tournament.",
-    youtubeId: "238EECInrJA",
+    provider: "youtube",
+    videoId: "vgplbpfPUS4",
   },
   {
     year: "2023",
-    title: "2023 Tournament Video",
+    title: "Aces Nationals 2023",
     description: "Highlights from the 2023 ACES Nationals with over 340 teams in attendance.",
-    youtubeId: "nM-juQe79kE",
+    provider: "youtube",
+    videoId: "wZIDcfblAVk",
+  },
+  {
+    year: "2022",
+    title: "ACES 2022",
+    description: "This is what the 2022 tournament was all about — relive the ACES Nationals action.",
+    provider: "youtube",
+    videoId: "Ct2tWy7PJrg",
   },
 ];
 
@@ -33,6 +54,9 @@ export function getVideoByYear(year: string) {
   return tournamentVideos.find((v) => v.year === year);
 }
 
-export function getYoutubeThumbnail(id: string) {
-  return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+export function getVideoThumbnail(video: Pick<TournamentVideo, "provider" | "videoId">) {
+  if (video.provider === "vimeo") {
+    return `https://vumbnail.com/${video.videoId}.jpg`;
+  }
+  return `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`;
 }
