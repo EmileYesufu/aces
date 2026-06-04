@@ -11,9 +11,7 @@ export const socialFeedConfig = {
     username: "acesfootballuk",
     profileUrl: "https://x.com/acesfootballuk",
     displayName: "@acesfootballuk",
-    /** Official X syndication timeline — live posts from X */
-    embedUrl:
-      "https://syndication.twitter.com/srv/timeline-profile/screen-name/acesfootballuk?showHeader=false&showReplies=false&showBorder=false&transparent=true&theme=light",
     embedHeight: 520,
+    tweetLimit: 5,
   },
 } as const;
