@@ -13,7 +13,7 @@ export const siteConfig = {
   social: {
     instagram: "https://www.instagram.com/acesnationals/",
     youtube: "https://www.youtube.com/channel/UCVYKAiI6Pm7USGyjpUyetXw",
-    facebook: "https://www.facebook.com/acesfootball",
+    facebook: "https://www.facebook.com/acesnationals/?locale=en_GB",
   },
 } as const;
 
