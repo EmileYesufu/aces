@@ -1,6 +1,6 @@
 /**
- * Scrapes winner photos from acesfootball.co.uk/hall-of-fame and writes
- * public/hall-of-fame/{year}/ assets plus scripts/hof-photos.json mapping.
+ * Scrapes tournament photos from acesfootball.co.uk/hall-of-fame per year.
+ * Photos are stored as a gallery only — not linked to individual winning teams.
  */
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
@@ -16,32 +16,8 @@ const YEARS = [2025, 2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015, 2014,
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-function slugify(ageGroup) {
-  return ageGroup
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
-}
-
 function normalizeUrl(u) {
   return u.replace(/-\d+x\d+(?=\.\w+$)/, "").split("?")[0];
-}
-
-function parseWinners(chunk) {
-  const texts = [...chunk.matchAll(/eae-table-body__text[^>]*>([^<]+)/gi)].map((m) =>
-    m[1].trim()
-  );
-  const start =
-    texts[0] === "Age Group" && texts[1] === "Team" && texts[2] === "Town" ? 3 : 0;
-  const winners = [];
-  for (let i = start; i + 2 < texts.length; i += 3) {
-    const row = { ageGroup: texts[i], team: texts[i + 1], town: texts[i + 2] };
-    const key = `${row.ageGroup}|${row.team}`;
-    if (!winners.some((w) => `${w.ageGroup}|${w.team}` === key)) {
-      winners.push(row);
-    }
-  }
-  return winners;
 }
 
 function parseImages(chunk) {
@@ -73,63 +49,6 @@ function getSection(page, year) {
   return page.slice(start, end);
 }
 
-function matchPhotos(winners, imgs) {
-  const mapping = {};
-  if (winners.length === imgs.length) {
-    winners.forEach((w, i) => {
-      mapping[w.ageGroup] = imgs[i];
-    });
-    return mapping;
-  }
-
-  const used = new Set();
-  for (const w of winners) {
-    const age = w.ageGroup.toLowerCase();
-    const uNum = age.match(/u(\d+)/)?.[1];
-    const isGirl = age.includes("girl") || age.includes("gu");
-    const teamTokens = w.team.toLowerCase().split(/\s+/).filter((t) => t.length > 3);
-
-    let best = null;
-    let bestScore = 0;
-    for (const img of imgs) {
-      if (used.has(img)) continue;
-      const name = img.toLowerCase();
-      let score = 0;
-      if (uNum && (name.includes(`u${uNum}`) || name.includes(`-${uNum}-`) || name.includes(`u${uNum}-`)))
-        score += 3;
-      if (isGirl && (name.includes("girl") || name.includes("gu") || name.includes("ladies"))) score += 2;
-      if (!isGirl && name.includes("boys")) score += 1;
-      for (const tok of teamTokens) {
-        if (name.includes(tok)) score += 2;
-      }
-      if (score > bestScore) {
-        bestScore = score;
-        best = img;
-      }
-    }
-    if (best && bestScore >= 2) {
-      mapping[w.ageGroup] = best;
-      used.add(best);
-    }
-  }
-
-  // Fill remaining by order for leftovers
-  const remainingWinners = winners.filter((w) => !mapping[w.ageGroup]);
-  const remainingImgs = imgs.filter((i) => !used.has(i));
-  remainingWinners.forEach((w, idx) => {
-    if (remainingImgs[idx]) mapping[w.ageGroup] = remainingImgs[idx];
-  });
-
-  return mapping;
-}
-
-async function download(url, dest) {
-  const res = await fetch(url, { headers: { "User-Agent": UA } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  await writeFile(dest, buf);
-}
-
 async function main() {
   const { execSync } = await import("child_process");
   const page = execSync(
@@ -141,31 +60,27 @@ async function main() {
 
   for (const year of YEARS) {
     const chunk = getSection(page, year);
-    const winners = parseWinners(chunk);
     const imgs = parseImages(chunk);
-    const photoMap = matchPhotos(winners, imgs);
 
     await mkdir(path.join(OUT_DIR, String(year)), { recursive: true });
-    result[year] = {};
+    result[year] = [];
 
-    for (const w of winners) {
-      const src = photoMap[w.ageGroup];
-      if (!src) continue;
+    for (let i = 0; i < imgs.length; i++) {
+      const src = imgs[i];
       const ext = path.extname(new URL(src).pathname) || ".jpg";
-      const slug = slugify(w.ageGroup);
-      const filename = `${slug}${ext}`;
+      const filename = `${String(i + 1).padStart(2, "0")}${ext}`;
       const dest = path.join(OUT_DIR, String(year), filename);
       const publicPath = `/hall-of-fame/${year}/${filename}`;
       try {
-      execSync(
-        `curl -sL -A "Mozilla/5.0" -o ${JSON.stringify(dest)} ${JSON.stringify(src)}`,
-        { stdio: "pipe" }
-      );
-      result[year][w.ageGroup] = publicPath;
-      console.log(`✓ ${year} ${w.ageGroup}`);
-    } catch (e) {
-      console.warn(`✗ ${year} ${w.ageGroup}: ${e.message}`);
-    }
+        execSync(
+          `curl -sL -A "Mozilla/5.0" -o ${JSON.stringify(dest)} ${JSON.stringify(src)}`,
+          { stdio: "pipe" }
+        );
+        result[year].push(publicPath);
+        console.log(`✓ ${year} ${filename}`);
+      } catch (e) {
+        console.warn(`✗ ${year} ${filename}: ${e.message}`);
+      }
     }
   }
 

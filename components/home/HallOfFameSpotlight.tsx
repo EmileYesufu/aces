@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Trophy, ArrowRight } from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -30,15 +29,9 @@ export function HallOfFameSpotlight() {
           {featured.map((w, i) => (
             <ScrollReveal key={`${w.ageGroup}-${w.team}`} delay={i * 0.06}>
               <div className="flex items-center gap-4 rounded-card border border-white/10 bg-white/5 p-4">
-                {w.photo ? (
-                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-aces-gold/30">
-                    <Image src={w.photo} alt="" fill className="object-cover" sizes="44px" />
-                  </div>
-                ) : (
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-aces-gold/15">
-                    <Trophy className="h-5 w-5 text-aces-gold-bright" aria-hidden="true" />
-                  </span>
-                )}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-aces-gold/15">
+                  <Trophy className="h-5 w-5 text-aces-gold-bright" aria-hidden="true" />
+                </span>
                 <div className="min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-wide text-aces-gold-bright">
                     {w.ageGroup}
