@@ -1,15 +1,31 @@
+import hallOfFamePhotos from "./hall-of-fame-photos.json";
+
 export type Winner = {
   ageGroup: string;
   team: string;
   town: string;
+  photo?: string;
 };
+
+/** Winner photo scraped from acesfootball.co.uk, keyed by tournament year and age group. */
+export function getWinnerPhoto(year: number, ageGroup: string): string | undefined {
+  const yearPhotos = hallOfFamePhotos[String(year) as keyof typeof hallOfFamePhotos];
+  return yearPhotos?.[ageGroup as keyof typeof yearPhotos];
+}
+
+export function withPhotos(year: number, winners: Winner[]): Winner[] {
+  return winners.map((w) => ({
+    ...w,
+    photo: w.photo ?? getWinnerPhoto(year, w.ageGroup),
+  }));
+}
 
 export type HallOfFameYear = {
   year: number;
   winners: Winner[];
 };
 
-export const hallOfFame: HallOfFameYear[] = [
+const hallOfFameRaw: HallOfFameYear[] = [
   {
     year: 2025,
     winners: [
@@ -269,6 +285,11 @@ export const hallOfFame: HallOfFameYear[] = [
     ],
   },
 ];
+
+export const hallOfFame: HallOfFameYear[] = hallOfFameRaw.map((entry) => ({
+  ...entry,
+  winners: withPhotos(entry.year, entry.winners),
+}));
 
 export const hallOfFameYears = hallOfFame.map((y) => y.year).sort((a, b) => b - a);
 
