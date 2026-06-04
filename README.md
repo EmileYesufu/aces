@@ -76,7 +76,7 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | `/videos` | Tournament video hub |
 | `/videos/[year]` | Individual video embed (2022–2025) |
 | `/hall-of-fame` | Winners archive 2009–2025 (filterable) |
-| `/shop` | ACES Shop placeholder |
+| `/shop` | ACES Shop — 28 products from Grip Active partner store |
 | `/contact` | Contact details and map |
 | `/policies/[slug]` | Policy documents |
 
@@ -106,4 +106,4 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 
 - Register Interest form validates client-side and shows a success message — no backend submission.
 - Tournament video IDs (YouTube + Vimeo) are in `content/videos.ts`; re-scrape with `node scripts/scrape-tournament-videos.mjs`.
-- Shop page links to the existing external ACES shop.
+- Shop page lists official Grip Active ACES merchandise with prices and links to checkout.
