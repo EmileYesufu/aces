@@ -1,11 +1,10 @@
 "use client";
 
-import { TwitterTimeline } from "@/components/social/TwitterTimeline";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { socialFeedConfig } from "@/content/social-feed";
 import { XIcon } from "@/components/ui/SocialIcons";
-import { LazyMount } from "@/components/ui/LazyMount";
+import { XTimelineEmbed } from "@/components/social/XTimelineEmbed";
 
 export function XFeed() {
   const { x } = socialFeedConfig;
@@ -34,14 +33,12 @@ export function XFeed() {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-        <LazyMount minHeight={x.timelineHeight}>
-          <TwitterTimeline
-            screenName={x.username}
-            height={x.timelineHeight}
-            chrome="noheader nofooter transparent"
-            tweetLimit={5}
-          />
-        </LazyMount>
+        <XTimelineEmbed
+          screenName={x.username}
+          profileUrl={x.profileUrl}
+          height={x.timelineHeight}
+          tweetLimit={5}
+        />
       </div>
     </div>
   );
