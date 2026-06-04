@@ -1,6 +1,6 @@
 "use client";
 
-import { TwitterTimelineEmbed } from "react-twitter-embed";
+import { TwitterTimeline } from "@/components/social/TwitterTimeline";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { socialFeedConfig } from "@/content/social-feed";
@@ -35,19 +35,11 @@ export function XFeed() {
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
         <LazyMount minHeight={x.timelineHeight}>
-          <TwitterTimelineEmbed
-            sourceType="profile"
+          <TwitterTimeline
             screenName={x.username}
-            options={{
-              height: x.timelineHeight,
-              chrome: "noheader nofooter transparent",
-              tweetLimit: 5,
-            }}
-            placeholder={
-              <div className="flex h-[520px] items-center justify-center bg-gray-50 text-aces-muted">
-                Loading posts from {x.displayName}…
-              </div>
-            }
+            height={x.timelineHeight}
+            chrome="noheader nofooter transparent"
+            tweetLimit={5}
           />
         </LazyMount>
       </div>

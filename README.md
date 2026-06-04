@@ -16,7 +16,7 @@ From the project root:
 
 ```bash
 # 1. Install dependencies
-npm install --legacy-peer-deps
+npm install
 
 # 2. Start the development server
 npm run dev
@@ -107,4 +107,3 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 - Register Interest form validates client-side and shows a success message — no backend submission.
 - YouTube video IDs are in `content/videos.ts`; replace with actual ACES channel IDs if needed.
 - Shop page links to the existing external ACES shop.
-- Use `npm install --legacy-peer-deps` because `react-twitter-embed` has a peer dependency on React 18.
