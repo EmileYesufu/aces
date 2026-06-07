@@ -7,7 +7,11 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { mainNav, siteConfig } from "@/content/site";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+
+const contactHref = "/contact";
+const navItems = mainNav.filter((item) => item.href !== contactHref);
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -93,7 +97,7 @@ export function Header() {
           </Link>
 
           <nav className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-1" aria-label="Main navigation">
-            {mainNav.map((item) =>
+            {navItems.map((item) =>
               item.children ? (
                 <div
                   key={item.label}
@@ -146,15 +150,20 @@ export function Header() {
             )}
           </nav>
 
-          <button
-            type="button"
-            className="rounded-md p-2 text-aces-navy lg:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <Button href={contactHref} size="sm" className="hidden rounded-full sm:inline-flex">
+              Contact
+            </Button>
+            <button
+              type="button"
+              className="rounded-md p-2 text-aces-navy lg:hidden"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -172,8 +181,14 @@ export function Header() {
               </button>
             </div>
 
+            <div className="border-b border-gray-100 px-4 py-3">
+              <Button href={contactHref} className="w-full rounded-full">
+                Contact
+              </Button>
+            </div>
+
             <div className="flex-1 overflow-y-auto px-4 py-4">
-              {mainNav.map((item) => (
+              {navItems.map((item) => (
                 <div key={item.label} className="border-b border-gray-100 py-3 last:border-0">
                   <Link
                     href={item.href}
