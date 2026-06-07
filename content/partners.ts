@@ -13,7 +13,7 @@ export const partners = [
   },
   {
     name: "Veo",
-    href: "https://www.veo.co/en-gb/partnership/aces-veo",
+    href: "https://www.veo.co",
     description: "Official video partner for tournament coverage.",
     logo: "/partners/veo.svg",
   },
