@@ -3,14 +3,15 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { siteConfig } from "@/content/site";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { SocialFeedSection } from "@/components/home/SocialFeed";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with the ACES Nationals team — email, phone, and venue details.",
+  description: "Send an enquiry to the ACES Nationals team — we'd love to hear from you.",
 };
 
 export default function ContactPage() {
@@ -18,7 +19,7 @@ export default function ContactPage() {
     <>
       <PageHero
         title="Contact"
-        subtitle="Get in touch with the ACES team — we'd love to hear from you."
+        subtitle="Send us an enquiry — we'd love to hear from you."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact" },
@@ -28,25 +29,15 @@ export default function ContactPage() {
       <Section>
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="space-y-6">
-            <Card>
-              <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="flex items-start gap-4">
-                <Phone className="h-6 w-6 shrink-0 text-aces-red" />
-                <div>
-                  <h2 className="font-bold text-aces-navy">Call us</h2>
-                  <p className="mt-1 text-aces-muted">{siteConfig.contact.phone}</p>
-                </div>
-              </a>
-            </Card>
-            <Card>
-              <a href={`mailto:${siteConfig.contact.email}`} className="flex items-start gap-4">
-                <Mail className="h-6 w-6 shrink-0 text-aces-red" />
-                <div>
-                  <h2 className="font-bold text-aces-navy">Email</h2>
-                  <p className="mt-1 text-aces-muted">{siteConfig.contact.email}</p>
-                </div>
-              </a>
-            </Card>
-            <Card>
+            <div id="enquiry">
+              <h2 className="mb-2 font-bold text-aces-navy">Send an enquiry</h2>
+              <p className="mb-6 text-aces-muted">
+                Fill in the form and the ACES team will get back to you as soon as possible.
+              </p>
+              <EnquiryForm />
+            </div>
+
+            <Card hover={false}>
               <div className="flex items-start gap-4">
                 <MapPin className="h-6 w-6 shrink-0 text-aces-red" />
                 <div>

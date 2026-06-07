@@ -75,7 +75,7 @@ export const policies: Policy[] = [
       {
         heading: "How to complain",
         content:
-          "Complaints should be submitted in writing to info@acesfootball.co.uk within 14 days of the incident. Include your team name, age group, and a detailed description of the complaint.",
+          "Complaints should be submitted via the contact form on our website within 14 days of the incident. Include your team name, age group, and a detailed description of the complaint.",
       },
       {
         heading: "Investigation",

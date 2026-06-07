@@ -5,8 +5,6 @@ export const siteConfig = {
     "The ACES Nationals is an invitation-only junior football tournament bringing elite boys and girls teams from across the country to Nottingham.",
   url: "https://acesfootball.co.uk",
   contact: {
-    email: "info@acesfootball.co.uk",
-    phone: "07557 095 656",
     address: "Riverside Sports Complex, Trent Side, Nottingham, NG7 2SA",
     venue: "University of Nottingham's Riverside Sports Complex, Lenton Lane NG7 2SA",
   },
@@ -16,6 +14,15 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/acesnationals/?locale=en_GB",
   },
 } as const;
+
+export const enquiryTopics = [
+  "General enquiry",
+  "Tournament entry",
+  "Register interest",
+  "Shop / kit orders",
+  "Complaint",
+  "Other",
+] as const;
 
 export type NavItem = {
   label: string;

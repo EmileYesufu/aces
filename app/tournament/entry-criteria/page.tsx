@@ -31,7 +31,7 @@ export default function EntryCriteriaPage() {
         <p className="mx-auto mb-12 max-w-3xl text-lg text-aces-muted">
           The most frequent question we get asked is how do we enter the prestigious competition?
           Here is a guideline for a better understanding of how to enter the event, without having
-          to wait for a call from the ACES Team.
+          to wait for a response from the ACES Team.
         </p>
 
         <SectionHeader title="FAQs" />

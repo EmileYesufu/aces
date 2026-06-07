@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle, ChevronLeft, ChevronRight, Users, Trophy, Mail, Clock, MailCheck } from "lucide-react";
-import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 type FormData = {
@@ -122,10 +121,10 @@ export function RegisterInterestForm() {
             <Mail className="mt-0.5 h-6 w-6 shrink-0 text-aces-red" aria-hidden="true" />
             <span className="text-sm text-aces-navy">
               <strong className="block">Questions in the meantime?</strong>
-              Email us at{" "}
-              <a href={`mailto:${siteConfig.contact.email}`} className="font-medium text-aces-red hover:underline">
-                {siteConfig.contact.email}
-              </a>
+              Send us an enquiry via our{" "}
+              <Link href="/contact#enquiry" className="font-medium text-aces-red hover:underline">
+                contact form
+              </Link>
               .
             </span>
           </li>

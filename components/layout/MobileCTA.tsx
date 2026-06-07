@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Phone } from "lucide-react";
-import { siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 
 export function MobileCTA() {
@@ -29,9 +27,8 @@ export function MobileCTA() {
         <Button href="/tournament/register" className="flex-1">
           Register Interest
         </Button>
-        <Button href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} external variant="outline" aria-label="Call ACES Nationals">
-          <Phone className="h-4 w-4" />
-          Call
+        <Button href="/contact#enquiry" variant="outline" className="flex-1" aria-label="Send an enquiry">
+          Enquiry
         </Button>
       </div>
     </div>

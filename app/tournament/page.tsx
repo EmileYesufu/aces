@@ -38,7 +38,6 @@ const eventJsonLd = {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
-    email: siteConfig.contact.email,
   },
 };
 

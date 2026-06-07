@@ -45,9 +45,9 @@ export const tournamentSchedule: ScheduleDay[] = [
 
 export const entryCriteriaFaqs = [
   {
-    question: "Can we call/email the ACES team and request an entry form?",
+    question: "Can we send an enquiry to request an entry form?",
     answer:
-      "The simple answer is yes. For example, looking good to win the league? Seasons not finished yet? Get in touch and we will put you on the ACES holding list.",
+      "Yes. Use the contact form on our website — for example, if you're looking good to win the league or the season hasn't finished yet, get in touch and we will put you on the ACES holding list.",
   },
   {
     question: "We are looking likely to finish 2nd in our league, do we have a chance of entering?",
@@ -75,8 +75,8 @@ export const entryCriteriaList = [
 ];
 
 export const entryCriteriaNotes = [
-  "If your league is not completed, but you are looking to be likely winners please contact the ACES team to discuss a place.",
-  "Subsequently if you are interested in reserving a place but look like you will not reach the criteria for entry (all may not be lost!!!) Please contact the ACES team to register your interest to be placed on a reserve list. This can happen if we have for example last minute withdrawals etc.",
+  "If your league is not completed, but you are looking to be likely winners please send an enquiry to discuss a place.",
+  "Subsequently if you are interested in reserving a place but look like you will not reach the criteria for entry (all may not be lost!!!) Please send an enquiry to register your interest to be placed on a reserve list. This can happen if we have for example last minute withdrawals etc.",
   "If a team is playing in an older age group and wish to be considered for their actual age group, they must have finished in a top four position within the league they have competed in. Note this league must the highest ranked division within any respective league.",
   "All Cities/Towns will be allowed a representative in the ACES i.e. If a team finished 5th in a multi-regional league but are deemed to be the strongest within their City/Town boundary, they will have the opportunity to request a place in the ACES if a place is available.",
   "International teams are welcome to apply to play at the ACES. Acceptance to the competition will be solely at the discretion of ACES management.",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Trophy } from "lucide-react";
+import { MapPin, Trophy } from "lucide-react";
 import { footerNav, policyLinks, siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 
@@ -13,25 +13,12 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Contact info</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">Get in touch</h3>
             <ul className="space-y-3">
               <li>
-                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-white transition-colors">
-                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-aces-red-bright" />
-                  <span>
-                    <span className="block text-sm text-gray-300">Call us</span>
-                    {siteConfig.contact.phone}
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${siteConfig.contact.email}`} className="flex items-start gap-3 hover:text-white transition-colors">
-                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-aces-red-bright" />
-                  <span>
-                    <span className="block text-sm text-gray-300">Email</span>
-                    {siteConfig.contact.email}
-                  </span>
-                </a>
+                <Link href="/contact#enquiry" className="hover:text-white transition-colors">
+                  Send an enquiry
+                </Link>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-aces-red-bright" />

@@ -77,7 +77,7 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | `/videos/[year]` | Individual video embed (2022–2025) |
 | `/hall-of-fame` | Winners archive 2009–2025 (filterable) |
 | `/shop` | ACES Shop — 28 products from Grip Active partner store |
-| `/contact` | Contact details and map |
+| `/contact` | Enquiry form and venue map |
 | `/policies/[slug]` | Policy documents |
 
 ## Content

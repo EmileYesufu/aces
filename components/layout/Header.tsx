@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Mail, Phone, MapPin } from "lucide-react";
+import { Menu, X, ChevronDown, MapPin } from "lucide-react";
 import { mainNav, siteConfig } from "@/content/site";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { Button } from "@/components/ui/Button";
@@ -57,13 +57,13 @@ export function Header() {
 
       <div className={cn("bg-aces-navy text-sm text-gray-300 transition-all", scrolled && "hidden sm:block")}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-          <a
-            href={`mailto:${siteConfig.contact.email}`}
+          <Link
+            href="/contact#enquiry"
             className="flex items-center gap-2 hover:text-white transition-colors"
           >
-            <Mail className="h-4 w-4" />
-            <span className="hidden sm:inline">{siteConfig.contact.email}</span>
-          </a>
+            <span className="hidden sm:inline">Send an enquiry</span>
+            <span className="sm:hidden">Enquiry</span>
+          </Link>
           <div className="flex items-center gap-4">
             <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
               <InstagramIcon className="h-4 w-4" />
@@ -155,6 +155,9 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <Button href="/contact#enquiry" size="sm" variant="outline" className="hidden rounded-full lg:inline-flex">
+              Get in Touch
+            </Button>
             <Button href="/tournament/register" size="sm" className="hidden rounded-full lg:inline-flex">
               Register Interest
             </Button>
@@ -193,13 +196,13 @@ export function Header() {
               >
                 Register
               </Link>
-              <a
-                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+              <Link
+                href="/contact#enquiry"
                 className="flex flex-1 items-center justify-center gap-1 rounded-md border border-aces-navy py-2.5 text-sm font-semibold text-aces-navy"
+                onClick={() => setMobileOpen(false)}
               >
-                <Phone className="h-4 w-4" />
-                Call
-              </a>
+                Enquiry
+              </Link>
               <Link
                 href="/contact"
                 className="flex flex-1 items-center justify-center gap-1 rounded-md border border-aces-navy py-2.5 text-sm font-semibold text-aces-navy"
