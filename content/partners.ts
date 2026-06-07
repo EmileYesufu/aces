@@ -7,7 +7,7 @@ export const partners = [
   },
   {
     name: "University of Nottingham Sport",
-    href: "https://www.nottingham.ac.uk/sport/performancesport/",
+    href: "https://www.nottingham.ac.uk/sport/",
     description: "Host venue at the Riverside Sports Complex.",
     logo: "/partners/uon-sport.png",
   },
