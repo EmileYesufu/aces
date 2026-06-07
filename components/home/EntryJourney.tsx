@@ -65,7 +65,7 @@ export function EntryJourney() {
             ))}
           </div>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Button href="/tournament/register" size="lg">
+            <Button href="/contact?topic=Register%20interest" size="lg">
               Register Interest
             </Button>
             <Button href="/tournament/entry-criteria" variant="outline" size="lg">

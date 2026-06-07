@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { MapPin, Trophy } from "lucide-react";
 import { footerNav, policyLinks, siteConfig } from "@/content/site";
-import { Button } from "@/components/ui/Button";
 
 export function Footer() {
   return (
@@ -13,21 +12,11 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Get in touch</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/contact#enquiry" className="hover:text-white transition-colors">
-                  Send an enquiry
-                </Link>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-aces-red-bright" />
-                <span>
-                  <span className="block text-sm text-gray-300">Location</span>
-                  {siteConfig.contact.address}
-                </span>
-              </li>
-            </ul>
+            <h3 className="mb-4 text-lg font-semibold text-white">Venue</h3>
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-aces-red-bright" />
+              <span>{siteConfig.contact.address}</span>
+            </div>
           </div>
 
           <div>
@@ -62,9 +51,6 @@ export function Footer() {
               The 18th annual ACES Nationals — invitation only tournament for elite junior boys and
               girls teams. May &amp; June 2026 at Riverside Sports Complex, Nottingham.
             </p>
-            <Button href="/tournament/register" size="sm" className="mt-4">
-              Register Interest
-            </Button>
           </div>
         </div>
 

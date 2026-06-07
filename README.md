@@ -67,7 +67,6 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 |-------|-------------|
 | `/` | Homepage — hero, credibility strip, schedule, experience, entry path, Hall of Fame, social, partners |
 | `/tournament` | 2026 tournament overview |
-| `/tournament/register` | Register interest form (UI mockup) |
 | `/tournament/entry-criteria` | Entry criteria and FAQs |
 | `/tournament/rules` | Tournament rules |
 | `/tournament/about` | About ACES Nationals and heritage timeline |
@@ -77,7 +76,7 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | `/videos/[year]` | Individual video embed (2022–2025) |
 | `/hall-of-fame` | Winners archive 2009–2025 (filterable) |
 | `/shop` | ACES Shop — 28 products from Grip Active partner store |
-| `/contact` | Enquiry form and venue map |
+| `/contact` | Contact form, venue map, and social links |
 | `/policies/[slug]` | Policy documents |
 
 ## Content
@@ -96,7 +95,7 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 - Hero with live countdown to the first 2026 fixture (May 30)
 - Credibility strip, schedule with boys/girls filter and ICS downloads
 - "A Day at the ACES" video + captioned gallery with accessible lightbox
-- Entry journey section and accessible multi-step register form
+- Entry journey section and contact form for registering interest
 - Hall of Fame champion spotlight and mobile-friendly year pills
 - Testimonials carousel with pause control
 - Live Instagram profile embed from [@acesnationals](https://www.instagram.com/acesnationals/)
@@ -104,6 +103,6 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 
 ## Notes
 
-- Register Interest form validates client-side and shows a success message — no backend submission.
+- Contact form submits via Web3Forms — set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env` (see `.env.example`).
 - Tournament video IDs (YouTube + Vimeo) are in `content/videos.ts`; re-scrape with `node scripts/scrape-tournament-videos.mjs`.
 - Shop page lists official Grip Active ACES merchandise with prices and links to checkout.

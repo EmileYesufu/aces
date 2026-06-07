@@ -23,12 +23,9 @@ export function MobileCTA() {
         hidden ? "translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="mx-auto flex max-w-lg gap-3">
-        <Button href="/tournament/register" className="flex-1">
-          Register Interest
-        </Button>
-        <Button href="/contact#enquiry" variant="outline" className="flex-1" aria-label="Send an enquiry">
-          Enquiry
+      <div className="mx-auto max-w-lg">
+        <Button href="/contact" className="w-full">
+          Contact
         </Button>
       </div>
     </div>

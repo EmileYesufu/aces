@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tournament/about",
     "/tournament/entry-criteria",
     "/tournament/rules",
-    "/tournament/register",
     "/news",
     "/videos",
     "/hall-of-fame",

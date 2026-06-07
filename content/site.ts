@@ -37,7 +37,6 @@ export const mainNav: NavItem[] = [
     href: "/tournament",
     children: [
       { label: "The 2026 Tournament", href: "/tournament" },
-      { label: "Register Interest", href: "/tournament/register" },
       { label: "Entry Criteria", href: "/tournament/entry-criteria" },
       { label: "Rules", href: "/tournament/rules" },
       { label: "About us", href: "/tournament/about" },

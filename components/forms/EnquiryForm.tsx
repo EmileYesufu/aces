@@ -16,7 +16,7 @@ type EnquiryFormProps = {
   compact?: boolean;
 };
 
-export function EnquiryForm({ defaultTopic = "General enquiry", compact = false }: EnquiryFormProps) {
+export function EnquiryForm({ defaultTopic = "Register interest", compact = false }: EnquiryFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 

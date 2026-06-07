@@ -2,24 +2,32 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { siteConfig } from "@/content/site";
+import { siteConfig, enquiryTopics } from "@/content/site";
 import { MapPin } from "lucide-react";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { SocialFeedSection } from "@/components/home/SocialFeed";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Send an enquiry to the ACES Nationals team — we'd love to hear from you.",
+  description:
+    "Contact the ACES Nationals team — register your team's interest, ask about entry, or send a general enquiry.",
 };
 
-export default function ContactPage() {
+type ContactPageProps = {
+  searchParams: Promise<{ topic?: string }>;
+};
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const { topic } = await searchParams;
+  const defaultTopic =
+    enquiryTopics.find((t) => t.toLowerCase() === topic?.toLowerCase()) ?? "Register interest";
+
   return (
     <>
       <PageHero
         title="Contact"
-        subtitle="Send us an enquiry — we'd love to hear from you."
+        subtitle="Register your team's interest, ask about entry, or send us a message — we'll get back to you as soon as possible."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact" },
@@ -29,13 +37,7 @@ export default function ContactPage() {
       <Section>
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="space-y-6">
-            <div id="enquiry">
-              <h2 className="mb-2 font-bold text-aces-navy">Send an enquiry</h2>
-              <p className="mb-6 text-aces-muted">
-                Fill in the form and the ACES team will get back to you as soon as possible.
-              </p>
-              <EnquiryForm />
-            </div>
+            <EnquiryForm defaultTopic={defaultTopic} />
 
             <Card hover={false}>
               <div className="flex items-start gap-4">
@@ -61,10 +63,6 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-
-            <Button href="/tournament/register" size="lg">
-              Register Interest
-            </Button>
           </div>
 
           <div className="aspect-square overflow-hidden rounded-xl lg:aspect-auto lg:h-full lg:min-h-[400px]">

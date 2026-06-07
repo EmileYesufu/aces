@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, MapPin } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { mainNav, siteConfig } from "@/content/site";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 function isActive(pathname: string, href: string) {
@@ -56,14 +55,7 @@ export function Header() {
       </a>
 
       <div className={cn("bg-aces-navy text-sm text-gray-300 transition-all", scrolled && "hidden sm:block")}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-          <Link
-            href="/contact#enquiry"
-            className="flex items-center gap-2 hover:text-white transition-colors"
-          >
-            <span className="hidden sm:inline">Send an enquiry</span>
-            <span className="sm:hidden">Enquiry</span>
-          </Link>
+        <div className="mx-auto flex max-w-7xl items-center justify-end px-4 py-2 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4">
             <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
               <InstagramIcon className="h-4 w-4" />
@@ -154,23 +146,15 @@ export function Header() {
             )}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Button href="/contact#enquiry" size="sm" variant="outline" className="hidden rounded-full lg:inline-flex">
-              Get in Touch
-            </Button>
-            <Button href="/tournament/register" size="sm" className="hidden rounded-full lg:inline-flex">
-              Register Interest
-            </Button>
-            <button
-              type="button"
-              className="rounded-md p-2 text-aces-navy lg:hidden"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-expanded={mobileOpen}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="rounded-md p-2 text-aces-navy lg:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
 
@@ -186,31 +170,6 @@ export function Header() {
               <button type="button" onClick={() => setMobileOpen(false)} aria-label="Close menu" className="p-2">
                 <X className="h-6 w-6 text-aces-navy" />
               </button>
-            </div>
-
-            <div className="flex gap-2 border-b border-gray-100 px-4 py-3">
-              <Link
-                href="/tournament/register"
-                className="flex-1 rounded-md bg-aces-red py-2.5 text-center text-sm font-semibold text-white"
-                onClick={() => setMobileOpen(false)}
-              >
-                Register
-              </Link>
-              <Link
-                href="/contact#enquiry"
-                className="flex flex-1 items-center justify-center gap-1 rounded-md border border-aces-navy py-2.5 text-sm font-semibold text-aces-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                Enquiry
-              </Link>
-              <Link
-                href="/contact"
-                className="flex flex-1 items-center justify-center gap-1 rounded-md border border-aces-navy py-2.5 text-sm font-semibold text-aces-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                <MapPin className="h-4 w-4" />
-                Map
-              </Link>
             </div>
 
             <div className="flex-1 overflow-y-auto px-4 py-4">
