@@ -4,12 +4,42 @@ export type Winner = {
   ageGroup: string;
   team: string;
   town: string;
+  photo?: string;
 };
 
-/** Tournament photos for a year (not matched to individual teams). */
+type YearPhotoEntry = Record<string, string> | string[];
+
+/** Age-group keyed photos (2026+). Older years use unlabelled gallery arrays only. */
+export function getYearPhotoMap(year: number): Record<string, string> | null {
+  const data = hallOfFamePhotos[String(year) as keyof typeof hallOfFamePhotos] as
+    | YearPhotoEntry
+    | undefined;
+  if (!data || Array.isArray(data)) return null;
+  return data;
+}
+
+export function hasLabeledPhotos(year: number): boolean {
+  return getYearPhotoMap(year) !== null;
+}
+
+export function getWinnerPhoto(year: number, ageGroup: string): string | undefined {
+  return getYearPhotoMap(year)?.[ageGroup];
+}
+
 export function getYearGalleryPhotos(year: number): string[] {
-  const photos = hallOfFamePhotos[String(year) as keyof typeof hallOfFamePhotos];
-  return Array.isArray(photos) ? photos : [];
+  const data = hallOfFamePhotos[String(year) as keyof typeof hallOfFamePhotos] as
+    | YearPhotoEntry
+    | undefined;
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  return Object.values(data);
+}
+
+export function withPhotos(year: number, winners: Winner[]): Winner[] {
+  return winners.map((w) => ({
+    ...w,
+    photo: w.photo ?? getWinnerPhoto(year, w.ageGroup),
+  }));
 }
 
 export type HallOfFameYear = {
@@ -18,6 +48,17 @@ export type HallOfFameYear = {
 };
 
 const hallOfFameRaw: HallOfFameYear[] = [
+  {
+    year: 2026,
+    winners: [
+      { ageGroup: "Boys U10", team: "The Academy Player", town: "West London" },
+      { ageGroup: "Boys U11", team: "Hinckley Hurricanes", town: "Hinckley" },
+      { ageGroup: "Boys U12", team: "Surrey Nomads", town: "Guildford" },
+      { ageGroup: "Boys U14", team: "Takeley", town: "Essex" },
+      { ageGroup: "Boys U15", team: "Cademy", town: "West London" },
+      { ageGroup: "Boys U16", team: "Redditch United", town: "Birmingham" },
+    ],
+  },
   {
     year: 2025,
     winners: [
@@ -278,7 +319,12 @@ const hallOfFameRaw: HallOfFameYear[] = [
   },
 ];
 
-export const hallOfFame: HallOfFameYear[] = hallOfFameRaw;
+export const hallOfFame: HallOfFameYear[] = hallOfFameRaw
+  .map((entry) => ({
+    ...entry,
+    winners: withPhotos(entry.year, entry.winners),
+  }))
+  .sort((a, b) => b.year - a.year);
 
 export const hallOfFameYears = hallOfFame.map((y) => y.year).sort((a, b) => b - a);
 

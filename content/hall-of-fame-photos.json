@@ -208,5 +208,13 @@
     "/hall-of-fame/2025/girls-gu15.jpg",
     "/hall-of-fame/2025/girls-gu16.jpg",
     "/hall-of-fame/2025/girls-gu18.jpeg"
-  ]
+  ],
+  "2026": {
+    "Boys U10": "/hall-of-fame/2026/boys-u10.jpg",
+    "Boys U11": "/hall-of-fame/2026/boys-u11.jpg",
+    "Boys U12": "/hall-of-fame/2026/boys-u12.jpg",
+    "Boys U14": "/hall-of-fame/2026/boys-u14.jpg",
+    "Boys U15": "/hall-of-fame/2026/boys-u15.jpg",
+    "Boys U16": "/hall-of-fame/2026/boys-u16.jpg"
+  }
 }

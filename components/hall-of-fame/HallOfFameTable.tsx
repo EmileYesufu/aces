@@ -1,7 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { hallOfFame, hallOfFameYears, getYearGalleryPhotos } from "@/content/hall-of-fame";
+import Image from "next/image";
+import {
+  hallOfFame,
+  hallOfFameYears,
+  getYearGalleryPhotos,
+  hasLabeledPhotos,
+} from "@/content/hall-of-fame";
 import { HallOfFameGallery } from "@/components/hall-of-fame/HallOfFameGallery";
 import { Search, Trophy, Medal } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -16,6 +22,7 @@ export function HallOfFameTable() {
 
   const yearData = hallOfFame.find((y) => y.year === selectedYear);
   const latestYear = hallOfFameYears[0];
+  const labeled = hasLabeledPhotos(selectedYear);
   const yearPhotos = getYearGalleryPhotos(selectedYear);
 
   const winners = useMemo(() => {
@@ -29,6 +36,10 @@ export function HallOfFameTable() {
         w.ageGroup.toLowerCase().includes(q)
     );
   }, [yearData, search]);
+
+  const showGallery =
+    !search.trim() &&
+    (labeled ? winners.some((w) => w.photo) : yearPhotos.length > 0);
 
   return (
     <div>
@@ -90,14 +101,24 @@ export function HallOfFameTable() {
         </div>
       </div>
 
-      {winners.length > 0 && !search.trim() && yearPhotos.length > 0 && (
-        <HallOfFameGallery year={selectedYear} photos={yearPhotos} />
+      {showGallery && yearData && (
+        <HallOfFameGallery
+          year={selectedYear}
+          winners={yearData.winners}
+          photos={yearPhotos}
+          labeled={labeled}
+        />
       )}
 
       <div className="overflow-x-auto rounded-xl border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-aces-navy text-white">
             <tr>
+              {labeled && (
+                <th scope="col" className="w-16 px-4 py-3 text-left text-sm font-semibold">
+                  <span className="sr-only">Photo</span>
+                </th>
+              )}
               <th scope="col" className="px-6 py-3 text-left text-sm font-semibold">
                 Age Group
               </th>
@@ -112,7 +133,7 @@ export function HallOfFameTable() {
           <tbody className="divide-y divide-gray-100 bg-white">
             {winners.length === 0 ? (
               <tr>
-                <td colSpan={3} className="px-6 py-8 text-center text-aces-muted">
+                <td colSpan={labeled ? 4 : 3} className="px-6 py-8 text-center text-aces-muted">
                   No winners found for this search.
                 </td>
               </tr>
@@ -124,6 +145,25 @@ export function HallOfFameTable() {
                     selectedYear === latestYear ? "hover:bg-aces-red/5" : ""
                   }`}
                 >
+                  {labeled && (
+                    <td className="px-4 py-3">
+                      {winner.photo ? (
+                        <div className="relative h-12 w-12 overflow-hidden rounded-lg bg-gray-100">
+                          <Image
+                            src={winner.photo}
+                            alt=""
+                            fill
+                            className="object-cover"
+                            sizes="48px"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                          <Medal className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                        </div>
+                      )}
+                    </td>
+                  )}
                   <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-aces-navy">
                     <span className="flex items-center gap-2">
                       <Medal

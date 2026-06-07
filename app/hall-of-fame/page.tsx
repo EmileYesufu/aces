@@ -5,7 +5,7 @@ import { HallOfFameTable } from "@/components/hall-of-fame/HallOfFameTable";
 
 export const metadata: Metadata = {
   title: "Hall of Fame",
-  description: "ACES Nationals champions from 2009 to 2025 — every age group winner since the tournament began.",
+  description: "ACES Nationals champions from 2009 to 2026 — every age group winner since the tournament began.",
 };
 
 export default function HallOfFamePage() {
