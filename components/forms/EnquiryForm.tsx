@@ -214,7 +214,7 @@ export function EnquiryForm({ defaultTopic = tournamentEntryTopic, compact = fal
           rows={5}
           disabled={formState === "loading"}
           className={inputClass}
-          placeholder="How can we help?"
+          placeholder={showTeamDetails ? "Tell us about your team" : "How can we help?"}
         />
       </div>
 
