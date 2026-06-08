@@ -3,7 +3,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { siteConfig, enquiryTopics } from "@/content/site";
+import { siteConfig, enquiryTopics, tournamentEntryTopic } from "@/content/site";
 import { MapPin } from "lucide-react";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { SocialFeedSection } from "@/components/home/SocialFeed";
@@ -20,8 +20,11 @@ type ContactPageProps = {
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const { topic } = await searchParams;
+  const normalizedTopic =
+    topic?.toLowerCase() === "register interest" ? tournamentEntryTopic : topic;
   const defaultTopic =
-    enquiryTopics.find((t) => t.toLowerCase() === topic?.toLowerCase()) ?? "Register interest";
+    enquiryTopics.find((t) => t.toLowerCase() === normalizedTopic?.toLowerCase()) ??
+    tournamentEntryTopic;
 
   return (
     <>

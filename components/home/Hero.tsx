@@ -39,7 +39,7 @@ export function Hero() {
             Riverside Sports Complex.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button href="/contact?topic=Register%20interest" size="lg">
+            <Button href="/contact?topic=Tournament%20entry" size="lg">
               Register Interest
             </Button>
             <Button href="/tournament/entry-criteria" variant="outline-white" size="lg">

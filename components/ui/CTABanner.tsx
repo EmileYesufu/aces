@@ -10,7 +10,7 @@ export function CTABanner() {
           for the 2026 ACES Nationals.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href="/contact?topic=Register%20interest" variant="secondary" size="lg">
+          <Button href="/contact?topic=Tournament%20entry" variant="secondary" size="lg">
             Register Interest
           </Button>
           <Button href="/tournament/entry-criteria" variant="outline-white" size="lg">

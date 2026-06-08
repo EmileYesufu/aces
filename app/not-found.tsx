@@ -20,7 +20,7 @@ export default function NotFound() {
           <Button href="/" size="lg">
             Back to home
           </Button>
-          <Link href="/contact?topic=Register%20interest" className="text-sm font-semibold text-aces-red-bright hover:underline">
+          <Link href="/contact?topic=Tournament%20entry" className="text-sm font-semibold text-aces-red-bright hover:underline">
             Register your interest
           </Link>
         </div>

@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { cn } from "@/lib/utils";
-import { enquiryTopics } from "@/content/site";
+import { enquiryTopics, requiresTeamDetails, tournamentEntryTopic } from "@/content/site";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -16,11 +16,13 @@ type EnquiryFormProps = {
   compact?: boolean;
 };
 
-export function EnquiryForm({ defaultTopic = "Register interest", compact = false }: EnquiryFormProps) {
+export function EnquiryForm({ defaultTopic = tournamentEntryTopic, compact = false }: EnquiryFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [topic, setTopic] = useState(defaultTopic);
 
   const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+  const showTeamDetails = requiresTeamDetails(topic);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -31,8 +33,19 @@ export function EnquiryForm({ defaultTopic = "Register interest", compact = fals
     const formData = new FormData(form);
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
-    const topic = String(formData.get("topic") ?? "").trim();
+    const selectedTopic = String(formData.get("topic") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
+    const teamName = String(formData.get("teamName") ?? "").trim();
+    const city = String(formData.get("city") ?? "").trim();
+    const ageGroup = String(formData.get("ageGroup") ?? "").trim();
+
+    if (requiresTeamDetails(selectedTopic)) {
+      if (!teamName || !city || !ageGroup) {
+        setFormState("error");
+        setErrorMessage("Please enter your team name, city, and age group.");
+        return;
+      }
+    }
 
     if (!accessKey) {
       setFormState("error");
@@ -49,12 +62,15 @@ export function EnquiryForm({ defaultTopic = "Register interest", compact = fals
         },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: `ACES Enquiry — ${topic}`,
+          subject: `ACES Enquiry — ${selectedTopic}`,
           from_name: name,
           name,
           email,
           replyto: email,
-          topic,
+          topic: selectedTopic,
+          team_name: teamName || undefined,
+          city: city || undefined,
+          age_group: ageGroup || undefined,
           message,
           botcheck: "",
         }),
@@ -68,6 +84,7 @@ export function EnquiryForm({ defaultTopic = "Register interest", compact = fals
 
       setFormState("success");
       form.reset();
+      setTopic(defaultTopic);
     } catch (error) {
       setFormState("error");
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
@@ -123,17 +140,68 @@ export function EnquiryForm({ defaultTopic = "Register interest", compact = fals
         <select
           id="enquiry-topic"
           name="topic"
-          defaultValue={defaultTopic}
+          value={topic}
+          onChange={(e) => setTopic(e.target.value as (typeof enquiryTopics)[number])}
           disabled={formState === "loading"}
           className={inputClass}
         >
-          {enquiryTopics.map((topic) => (
-            <option key={topic} value={topic}>
-              {topic}
+          {enquiryTopics.map((option) => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
         </select>
       </div>
+
+      {showTeamDetails && (
+        <div className="space-y-6 rounded-lg border border-gray-200 bg-surface p-4 sm:p-6">
+          <p className="text-sm font-medium text-aces-navy">Team details</p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <label htmlFor="enquiry-team-name" className="block text-sm font-medium text-aces-navy">
+                Team name <span className="text-aces-red">*</span>
+              </label>
+              <input
+                type="text"
+                id="enquiry-team-name"
+                name="teamName"
+                required
+                disabled={formState === "loading"}
+                className={inputClass}
+                placeholder="Your team name"
+              />
+            </div>
+            <div>
+              <label htmlFor="enquiry-city" className="block text-sm font-medium text-aces-navy">
+                City <span className="text-aces-red">*</span>
+              </label>
+              <input
+                type="text"
+                id="enquiry-city"
+                name="city"
+                required
+                disabled={formState === "loading"}
+                className={inputClass}
+                placeholder="Town or city"
+              />
+            </div>
+            <div>
+              <label htmlFor="enquiry-age-group" className="block text-sm font-medium text-aces-navy">
+                Age group <span className="text-aces-red">*</span>
+              </label>
+              <input
+                type="text"
+                id="enquiry-age-group"
+                name="ageGroup"
+                required
+                disabled={formState === "loading"}
+                className={inputClass}
+                placeholder="e.g. U12 Boys"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div>
         <label htmlFor="enquiry-message" className="block text-sm font-medium text-aces-navy">

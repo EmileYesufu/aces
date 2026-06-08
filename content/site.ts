@@ -18,11 +18,16 @@ export const siteConfig = {
 export const enquiryTopics = [
   "General enquiry",
   "Tournament entry",
-  "Register interest",
-  "Shop / kit orders",
+  "Sponsorship enquiries",
   "Complaint",
   "Other",
 ] as const;
+
+export const tournamentEntryTopic = "Tournament entry" as const;
+
+export function requiresTeamDetails(topic: string): boolean {
+  return topic === tournamentEntryTopic || topic.toLowerCase() === "register interest";
+}
 
 export type NavItem = {
   label: string;
