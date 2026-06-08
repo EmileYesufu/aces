@@ -93,7 +93,7 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, poli
 
 - Hero with live countdown to the first 2026 fixture (May 30)
 - Credibility strip, schedule with boys/girls filter and ICS downloads
-- "A Day at the ACES" video + captioned gallery with accessible lightbox
+- "A Day at the ACES" video section
 - Entry journey section and contact form for registering interest
 - Hall of Fame champion spotlight and mobile-friendly year pills
 - Live Instagram profile embed from [@acesnationals](https://www.instagram.com/acesnationals/)
