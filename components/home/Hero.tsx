@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-aces-navy">
       <Image
-        src="/hero.jpg"
+        src="/hero-bg.jpg"
         alt="ACES Nationals tournament at Riverside Sports Complex"
         fill
         priority
