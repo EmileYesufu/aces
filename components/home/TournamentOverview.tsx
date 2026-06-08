@@ -1,7 +1,7 @@
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ScheduleSection } from "@/components/home/ScheduleSection";
-import { tournamentOverview } from "@/content/tournament-2026";
+import { tournamentOverview } from "@/content/tournament-2027";
 
 export function TournamentOverview() {
   return (

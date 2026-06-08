@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
-import { tournamentRules } from "@/content/tournament-2026";
+import { tournamentRules } from "@/content/tournament-2027";
 
 export const metadata: Metadata = {
   title: "Tournament Rules",
@@ -17,7 +17,7 @@ export default function RulesPage() {
         subtitle="All matches are played in accordance with FA rules and regulations."
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "2026 Tournament", href: "/tournament" },
+          { label: "2027 Tournament", href: "/tournament" },
           { label: "Rules" },
         ]}
       />

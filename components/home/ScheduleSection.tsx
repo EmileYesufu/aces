@@ -4,16 +4,20 @@ import { useMemo, useState } from "react";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Countdown } from "@/components/ui/Countdown";
-import { tournamentSchedule } from "@/content/tournament-2026";
+import {
+  tournamentSchedule,
+  tournamentDatesConfirmed,
+  tournamentYear,
+} from "@/content/tournament-2027";
 import { CalendarPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function parseDate(dateStr: string): Date {
   const months: Record<string, number> = { May: 4, June: 5 };
   const match = dateStr.match(/(\w+)\s+(\d+)/);
-  if (!match) return new Date(2026, 5, 1);
+  if (!match) return new Date(tournamentYear, 5, 1);
   const month = months[match[1]] ?? 5;
-  return new Date(2026, month, parseInt(match[2], 10));
+  return new Date(tournamentYear, month, parseInt(match[2], 10));
 }
 
 function buildIcs(day: (typeof tournamentSchedule)[number]) {
@@ -21,7 +25,7 @@ function buildIcs(day: (typeof tournamentSchedule)[number]) {
   const end = new Date(start);
   end.setDate(end.getDate() + 1);
   const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  const title = `ACES Nationals 2026 — ${day.ageGroups.join(" & ")}`;
+  const title = `ACES Nationals ${tournamentYear} — ${day.ageGroups.join(" & ")}`;
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
@@ -31,7 +35,7 @@ function buildIcs(day: (typeof tournamentSchedule)[number]) {
     `DTEND:${fmt(end)}`,
     `SUMMARY:${title}`,
     "LOCATION:Riverside Sports Complex, Nottingham NG7 2SA",
-    "DESCRIPTION:ACES Nationals 2026 football tournament",
+    `DESCRIPTION:ACES Nationals ${tournamentYear} football tournament`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\r\n");
@@ -81,8 +85,8 @@ export function ScheduleSection() {
     <Section className="bg-surface bg-pitch-pattern">
       <ScrollReveal>
         <SectionHeader
-          title="2026 Tournament Schedule"
-          subtitle="Four weekends in May & June — age groups relate to season 2026/27"
+          title={`${tournamentYear} Tournament Schedule`}
+          subtitle="Four weekends in May & June — dates coming soon · age groups relate to season 2027/28"
           centered
         />
       </ScrollReveal>
@@ -120,7 +124,7 @@ export function ScheduleSection() {
         <div className="absolute left-6 top-0 hidden h-full w-0.5 bg-aces-red/30 md:block" aria-hidden="true" />
         <div className="space-y-8">
           {days.map((day, index) => (
-            <ScrollReveal key={day.date + day.ageGroups.join()} delay={index * 0.06}>
+            <ScrollReveal key={day.label + day.ageGroups.join()} delay={index * 0.06}>
               <div className="relative flex flex-col gap-4 md:flex-row md:items-start md:gap-8">
                 <div className="flex items-center gap-3 md:w-40 md:shrink-0 md:flex-col md:items-start">
                   <div className="hidden h-3 w-3 rounded-full bg-aces-red ring-4 ring-aces-red/20 md:block md:absolute md:-left-[5px]" />
@@ -137,14 +141,16 @@ export function ScheduleSection() {
                       <AgeBadge key={group} group={group} />
                     ))}
                   </div>
-                  <a
-                    href={`data:text/calendar;charset=utf-8,${encodeURIComponent(buildIcs(day))}`}
-                    download={`aces-nationals-${day.date.replace(/\s/g, "-").toLowerCase()}.ics`}
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-aces-red hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red"
-                  >
-                    <CalendarPlus className="h-4 w-4" aria-hidden="true" />
-                    Add to calendar
-                  </a>
+                  {tournamentDatesConfirmed && (
+                    <a
+                      href={`data:text/calendar;charset=utf-8,${encodeURIComponent(buildIcs(day))}`}
+                      download={`aces-nationals-${day.date.replace(/\s/g, "-").toLowerCase()}.ics`}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-aces-red hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red"
+                    >
+                      <CalendarPlus className="h-4 w-4" aria-hidden="true" />
+                      Add to calendar
+                    </a>
+                  )}
                 </div>
               </div>
             </ScrollReveal>

@@ -1,5 +1,5 @@
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { heritageMilestones } from "@/content/tournament-2026";
+import { heritageMilestones } from "@/content/tournament-2027";
 
 export function MilestoneTimeline() {
   return (

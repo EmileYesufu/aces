@@ -10,7 +10,7 @@ export function Partners() {
   return (
     <Section>
       <ScrollReveal>
-        <SectionHeader title="Our 2026 tournament partners" centered />
+        <SectionHeader title="Our 2027 tournament partners" centered />
       </ScrollReveal>
       <div className="grid gap-8 md:grid-cols-3">
         {partners.map((partner, i) => (

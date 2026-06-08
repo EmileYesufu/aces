@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const YEARS = ["2025", "2024", "2023", "2022"];
+const YEARS = ["2026", "2025", "2024", "2023", "2022"];
 
 function fetchPage(url) {
   return execSync(`curl -sL -A "Mozilla/5.0" ${JSON.stringify(url)}`, {

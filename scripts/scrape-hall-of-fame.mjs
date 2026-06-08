@@ -11,7 +11,7 @@ const ROOT = path.join(__dirname, "..");
 const OUT_DIR = path.join(ROOT, "public", "hall-of-fame");
 const MAP_PATH = path.join(__dirname, "hof-photos.json");
 
-const YEARS = [2025, 2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009];
+const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009];
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";

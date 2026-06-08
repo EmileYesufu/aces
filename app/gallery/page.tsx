@@ -19,10 +19,10 @@ export default function GalleryPage() {
     <>
       <PageHero
         title="2026 Photo Gallery"
-        subtitle="Action, atmosphere, and memories from this year's ACES Nationals tournament weekends."
+        subtitle="Photos from the 2026 ACES Nationals — 2027 gallery coming after the tournament."
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "2026 Photo Gallery" },
+          { label: "Gallery" },
         ]}
       />
 

@@ -63,7 +63,7 @@ export function Header() {
             />
             <span className="hidden font-display text-lg font-bold uppercase leading-none tracking-tight text-aces-navy sm:block">
               ACES Nationals
-              <span className="block text-xs font-medium tracking-wide text-aces-muted">National Finals 2026</span>
+              <span className="block text-xs font-medium tracking-wide text-aces-muted">National Finals 2027</span>
             </span>
           </Link>
 

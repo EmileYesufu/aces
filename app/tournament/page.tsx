@@ -2,25 +2,29 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { CTABanner } from "@/components/ui/CTABanner";
-import { tournamentOverview, tournamentSchedule } from "@/content/tournament-2026";
+import {
+  tournamentOverview,
+  tournamentSchedule,
+  tournamentDatesConfirmed,
+  tournamentYear,
+} from "@/content/tournament-2027";
 import { siteConfig } from "@/content/site";
 import { Calendar, MapPin, Shield, Eye } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
-  title: "The 2026 Tournament",
-  description: "ACES Nationals 2026 — four weekends in May & June at Riverside Sports Complex, Nottingham.",
+  title: "The 2027 Tournament",
+  description:
+    "ACES Nationals 2027 — four weekends in May & June at Riverside Sports Complex, Nottingham. Dates coming soon.",
 };
 
 const eventJsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsEvent",
-  name: "ACES Nationals 2026 Football Tournament",
+  name: "ACES Nationals 2027 Football Tournament",
   description:
-    "The 18th annual ACES Nationals — an invitation-only junior football tournament for elite boys and girls teams from across the country.",
-  startDate: "2026-05-30",
-  endDate: "2026-06-21",
-  eventStatus: "https://schema.org/EventScheduled",
+    "The 19th annual ACES Nationals — an invitation-only junior football tournament for elite boys and girls teams from across the country.",
+  eventStatus: "https://schema.org/EventPostponed",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   sport: "Football",
   location: {
@@ -49,11 +53,11 @@ export default function TournamentPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
       />
       <PageHero
-        title="The 2026 Tournament"
-        subtitle="The 18th annual ACES Nationals football tournament — invitation only, elite junior boys and girls teams."
+        title="The 2027 Tournament"
+        subtitle="The 19th annual ACES Nationals football tournament — invitation only, elite junior boys and girls teams."
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "2026 Tournament" },
+          { label: "2027 Tournament" },
         ]}
       />
 
@@ -66,7 +70,11 @@ export default function TournamentPage() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: Calendar, title: "May & June 2026", desc: "Four tournament weekends" },
+            {
+              icon: Calendar,
+              title: `May & June ${tournamentYear}`,
+              desc: tournamentDatesConfirmed ? "Four tournament weekends" : "Dates coming soon",
+            },
             { icon: MapPin, title: "Nottingham", desc: siteConfig.contact.venue },
             { icon: Shield, title: "FA Sanctioned", desc: "Fully sanctioned by the Football Association" },
             { icon: Eye, title: "Scouts Attending", desc: "Premier League, WSL and Football League scouts" },
@@ -84,7 +92,7 @@ export default function TournamentPage() {
         <SectionHeader title="Tournament Schedule" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {tournamentSchedule.map((day) => (
-            <Card key={day.date + day.ageGroups.join()}>
+            <Card key={day.label + day.ageGroups.join()}>
               <p className="text-sm font-medium text-aces-red">{day.label}</p>
               <p className="mt-1 text-xl font-bold text-aces-navy">{day.date}</p>
               <ul className="mt-3 space-y-1 capitalize text-aces-muted">

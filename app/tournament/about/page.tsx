@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { MilestoneTimeline } from "@/components/home/MilestoneTimeline";
-import { aboutContent, tournamentSchedule } from "@/content/tournament-2026";
+import { aboutContent, tournamentSchedule } from "@/content/tournament-2027";
 import { partners } from "@/content/partners";
 import { siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
@@ -18,10 +18,10 @@ export default function AboutPage() {
     <>
       <PageHero
         title="About the ACES Nationals"
-        subtitle="Eighteen years of showcasing the best junior grassroots football talent in the country."
+        subtitle="Nineteen years of showcasing the best junior grassroots football talent in the country."
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "2026 Tournament", href: "/tournament" },
+          { label: "2027 Tournament", href: "/tournament" },
           { label: "About us" },
         ]}
       />
@@ -56,7 +56,7 @@ export default function AboutPage() {
             <div className="mt-4 h-1 w-16 rounded bg-aces-red" />
             <ul className="mt-6 space-y-2 capitalize text-aces-muted">
               {tournamentSchedule.map((day) => (
-                <li key={day.date}>
+                <li key={day.label + day.ageGroups.join()}>
                   <strong className="text-aces-navy">{day.date}</strong> — {day.ageGroups.join(", ")}
                 </li>
               ))}

@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-/** First fixture of the 2026 tournament — May 30th 2026, 09:00 BST */
-export const FIRST_FIXTURE = new Date("2026-05-30T09:00:00+01:00");
+import { firstFixtureDate } from "@/content/tournament-2027";
 
 type TimeLeft = {
   days: number;
@@ -29,7 +27,7 @@ function getTimeLeft(target: Date): TimeLeft {
 }
 
 type CountdownProps = {
-  target?: Date;
+  target?: Date | null;
   variant?: "hero" | "panel";
   className?: string;
 };
@@ -42,24 +40,41 @@ const unitLabels: Record<(typeof units)[number], string> = {
   seconds: "Sec",
 };
 
-export function Countdown({ target = FIRST_FIXTURE, variant = "hero", className }: CountdownProps) {
+export function Countdown({ target = firstFixtureDate, variant = "hero", className }: CountdownProps) {
   const [mounted, setMounted] = useState(false);
-  const [time, setTime] = useState<TimeLeft>(() => getTimeLeft(target));
+  const [time, setTime] = useState<TimeLeft | null>(null);
+
+  const isHero = variant === "hero";
 
   useEffect(() => {
+    if (!target) return;
     setMounted(true);
     setTime(getTimeLeft(target));
     const id = setInterval(() => setTime(getTimeLeft(target)), 1000);
     return () => clearInterval(id);
   }, [target]);
 
-  const isHero = variant === "hero";
+  if (!target) {
+    return (
+      <p className={className}>
+        <span
+          className={
+            isHero
+              ? "font-display text-lg font-bold uppercase tracking-wide text-aces-gold-bright"
+              : "font-display text-lg font-bold uppercase tracking-wide text-aces-navy"
+          }
+        >
+          Tournament dates coming soon
+        </span>
+      </p>
+    );
+  }
 
-  if (mounted && time.done) {
+  if (mounted && time?.done) {
     return (
       <p className={className}>
         <span className="font-display text-lg font-bold uppercase tracking-wide text-aces-gold-bright">
-          The 2026 tournament is underway
+          The tournament is underway
         </span>
       </p>
     );
@@ -93,7 +108,7 @@ export function Countdown({ target = FIRST_FIXTURE, variant = "hero", className 
                   : "font-display text-2xl font-bold tabular-nums text-aces-navy sm:text-3xl"
               }
             >
-              {mounted ? String(time[unit]).padStart(2, "0") : "--"}
+              {mounted && time ? String(time[unit]).padStart(2, "0") : "--"}
             </span>
             <span
               className={

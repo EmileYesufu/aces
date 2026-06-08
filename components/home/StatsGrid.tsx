@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { tournamentStats } from "@/content/tournament-2026";
+import { tournamentStats } from "@/content/tournament-2027";
 import { Users, Trophy, Flag } from "lucide-react";
 
 const icons = [Users, Trophy, Flag];

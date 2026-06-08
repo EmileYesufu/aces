@@ -7,7 +7,7 @@ import {
   entryCriteriaFaqs,
   entryCriteriaList,
   entryCriteriaNotes,
-} from "@/content/tournament-2026";
+} from "@/content/tournament-2027";
 
 export const metadata: Metadata = {
   title: "Entry Criteria",
@@ -22,7 +22,7 @@ export default function EntryCriteriaPage() {
         subtitle="Entry to the ACES National finals is widely regarded as the ultimate prize in junior football."
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "2026 Tournament", href: "/tournament" },
+          { label: "2027 Tournament", href: "/tournament" },
           { label: "Entry Criteria" },
         ]}
       />

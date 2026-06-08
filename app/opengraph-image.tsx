@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "ACES Nationals 2026 Football Tournament";
+export const alt = "ACES Nationals 2027 Football Tournament";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
             color: "#d30f29",
           }}
         >
-          18th Annual · May &amp; June 2026
+          19th Annual · May &amp; June 2027
         </div>
         <div
           style={{
@@ -54,7 +54,7 @@ export default function OpengraphImage() {
             color: "#d30f29",
           }}
         >
-          2026
+          2027
         </div>
         <div style={{ display: "flex", marginTop: 32, fontSize: 32, color: "#cbd5e1" }}>
           Elite junior football · Riverside Sports Complex, Nottingham

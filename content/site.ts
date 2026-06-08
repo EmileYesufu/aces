@@ -38,10 +38,10 @@ export type NavItem = {
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "2026 Tournament",
+    label: "2027 Tournament",
     href: "/tournament",
     children: [
-      { label: "The 2026 Tournament", href: "/tournament" },
+      { label: "The 2027 Tournament", href: "/tournament" },
       { label: "Entry Criteria", href: "/tournament/entry-criteria" },
       { label: "Rules", href: "/tournament/rules" },
       { label: "About us", href: "/tournament/about" },
@@ -51,6 +51,7 @@ export const mainNav: NavItem[] = [
     label: "Tournament Videos",
     href: "/videos",
     children: [
+      // Add { label: "2026 Tournament Video", href: "/videos/2026" } when published — see content/videos.ts
       { label: "2025 Tournament Video", href: "/videos/2025" },
       { label: "2024 Tournament Video", href: "/videos/2024" },
       { label: "2023 Tournament Video", href: "/videos/2023" },
@@ -58,7 +59,7 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "Hall of Fame", href: "/hall-of-fame" },
-  { label: "2026 Gallery", href: "/gallery" },
+  { label: "Gallery", href: "/gallery" },
   { label: "ACES Shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ];

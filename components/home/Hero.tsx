@@ -7,7 +7,7 @@ const stats = [
   { value: "14", label: "Age Groups" },
   { value: "400", suffix: "+", label: "Teams" },
   { value: "FA", label: "Sanctioned", animate: false },
-  { value: "18", suffix: "th", label: "Annual Event" },
+  { value: "19", suffix: "th", label: "Annual Event" },
 ];
 
 export function Hero() {
@@ -28,10 +28,10 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
         <div className="max-w-3xl">
           <p className="inline-flex items-center gap-2 rounded-full border border-aces-red-bright/40 bg-aces-red/15 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-widest text-aces-red-bright">
-            18th Annual · May &amp; June 2026
+            19th Annual · May &amp; June 2027 · Dates coming soon
           </p>
           <h1 className="font-display mt-5 text-4xl font-bold uppercase leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl text-balance">
-            ACES Nationals <span className="text-aces-red-bright">2026</span>
+            ACES Nationals <span className="text-aces-red-bright">2027</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-gray-200 md:text-xl">
             The invitation-only finals for elite junior boys and girls teams from across the

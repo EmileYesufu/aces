@@ -20,6 +20,9 @@ export const featuredVideoId = featuredVideo.videoId;
 
 /** Scraped from acesfootball.co.uk/{year}-tournament-video/ */
 export const tournamentVideos: TournamentVideo[] = [
+  // Add 2026 when published at acesfootball.co.uk/2026-tournament-video/
+  // Run: node scripts/scrape-tournament-videos.mjs
+  // Then add nav entry in content/site.ts
   {
     year: "2025",
     title: "ACES National 2025",

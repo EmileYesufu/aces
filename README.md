@@ -4,6 +4,23 @@ Modern mockup website for [ACES Football](https://acesfootball.co.uk/) — the c
 
 Built with **Next.js 16**, **TypeScript**, and **Tailwind CSS v4**.
 
+## Branches
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Live site for the **2026** tournament |
+| `2027` | Staging branch for the **2027** tournament (merge to `main` when ready to go live) |
+
+The `2027` branch points all live tournament content at `content/tournament-2027.ts`. Schedule dates show **"Coming soon"** until confirmed — then update `tournamentDatesConfirmed`, `firstFixtureDate`, and the schedule dates in that file.
+
+### Go-live checklist (merge `2027` → `main`)
+
+- [ ] 2027 schedule dates confirmed; countdown and calendar downloads enabled
+- [ ] 2026 Hall of Fame complete (all 14 age groups + photos)
+- [ ] 2026 tournament video published — add to `content/videos.ts` and nav in `content/site.ts`
+- [ ] Merge `2027` → `main` and deploy
+- [ ] Switch gallery to 2027 photos when available (`content/tournament-gallery.ts`, `app/gallery/page.tsx`)
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20 or later
@@ -66,14 +83,14 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | Route | Description |
 |-------|-------------|
 | `/` | Homepage — hero, credibility strip, schedule, experience, entry path, Hall of Fame, social, partners |
-| `/tournament` | 2026 tournament overview |
+| `/tournament` | 2027 tournament overview (on `2027` branch) |
 | `/tournament/entry-criteria` | Entry criteria and FAQs |
 | `/tournament/rules` | Tournament rules |
 | `/tournament/about` | About ACES Nationals and heritage timeline |
 | `/videos` | Tournament video hub |
-| `/videos/[year]` | Individual video embed (2022–2025) |
-| `/hall-of-fame` | Winners archive 2009–2026 (filterable) |
-| `/gallery` | 2026 tournament photo gallery |
+| `/videos/[year]` | Individual video embed (2022–2025; 2026 when published) |
+| `/hall-of-fame` | Winners archive 2009–2027 (filterable) |
+| `/gallery` | 2026 tournament photo gallery (until 2027 photos are ready) |
 | `/shop` | ACES Shop — 28 products from Grip Active partner store |
 | `/contact` | Contact form, venue map, and social links |
 | `/policies/[slug]` | Policy documents |
@@ -81,6 +98,9 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 ## Content
 
 Static content lives in `content/` — tournament dates, Hall of Fame data, policies, and site config. Update these files to change copy without touching components.
+
+- **Current tournament:** `content/tournament-2027.ts` (on `2027` branch)
+- **Archive reference:** `content/tournament-2026.ts`
 
 ## Brand colours
 
@@ -91,8 +111,8 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, poli
 
 ## Visual features
 
-- Hero with live countdown to the first 2026 fixture (May 30)
-- Credibility strip, schedule with boys/girls filter and ICS downloads
+- Hero with countdown to first fixture (or "dates coming soon" when TBD)
+- Credibility strip, schedule with boys/girls filter and ICS downloads (when dates confirmed)
 - "A Day at the ACES" video section
 - Entry journey section and contact form for registering interest
 - Hall of Fame champion spotlight and mobile-friendly year pills
@@ -103,4 +123,5 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, poli
 
 - Contact form submits via Web3Forms — set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env` (see `.env.example`).
 - Tournament video IDs (YouTube + Vimeo) are in `content/videos.ts`; re-scrape with `node scripts/scrape-tournament-videos.mjs`.
+- Hall of Fame photos: `node scripts/scrape-hall-of-fame.mjs` (2026 uses labelled age-group photos in `hall-of-fame-photos.json`).
 - Shop page lists official Grip Active ACES merchandise with prices and links to checkout.
