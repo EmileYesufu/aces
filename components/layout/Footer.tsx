@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { MapPin, Trophy } from "lucide-react";
 import { footerNav, policyLinks, siteConfig } from "@/content/site";
+import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+
+const socialLinks = [
+  { label: "Instagram", href: siteConfig.social.instagram, Icon: InstagramIcon },
+  { label: "YouTube", href: siteConfig.social.youtube, Icon: YoutubeIcon },
+  { label: "Facebook", href: siteConfig.social.facebook, Icon: FacebookIcon },
+] as const;
 
 export function Footer() {
   return (
@@ -46,11 +53,25 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">2026 Tournament</h3>
-            <p className="text-sm leading-relaxed">
-              The 18th annual ACES Nationals — invitation only tournament for elite junior boys and
-              girls teams. May &amp; June 2026 at Riverside Sports Complex, Nottingham.
+            <h3 className="mb-4 text-lg font-semibold text-white">Follow us</h3>
+            <p className="mb-4 text-sm leading-relaxed">
+              Keep up with the ACES Nationals on social media — highlights, news, and tournament updates.
             </p>
+            <ul className="space-y-3">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 transition-colors hover:text-white"
+                  >
+                    <Icon className="h-5 w-5 shrink-0 text-aces-red-bright" aria-hidden="true" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

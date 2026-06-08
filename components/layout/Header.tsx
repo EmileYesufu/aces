@@ -5,8 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { mainNav, siteConfig } from "@/content/site";
-import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { mainNav } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -22,13 +21,6 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -58,28 +50,7 @@ export function Header() {
         Skip to content
       </a>
 
-      <div className={cn("bg-aces-navy text-sm text-gray-300 transition-all", scrolled && "hidden sm:block")}>
-        <div className="mx-auto flex max-w-7xl items-center justify-end px-4 py-2 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4">
-            <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
-              <InstagramIcon className="h-4 w-4" />
-            </a>
-            <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-white transition-colors">
-              <YoutubeIcon className="h-4 w-4" />
-            </a>
-            <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
-              <FacebookIcon className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className={cn(
-          "border-b border-gray-200 bg-white shadow-sm transition-all duration-300",
-          scrolled && "shadow-md"
-        )}
-      >
+      <div className="border-b border-gray-200 bg-white shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex shrink-0 items-center gap-3 py-2" aria-label="ACES Nationals — home">
             <Image
@@ -87,7 +58,7 @@ export function Header() {
               alt="ACES Nationals Tournament"
               width={500}
               height={500}
-              className={cn("w-auto transition-all duration-300", scrolled ? "h-11" : "h-14")}
+              className={cn("w-auto transition-all duration-300 h-14")}
               priority
             />
             <span className="hidden font-display text-lg font-bold uppercase leading-none tracking-tight text-aces-navy sm:block">

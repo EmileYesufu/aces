@@ -97,7 +97,6 @@ Static content lives in `content/` — tournament dates, Hall of Fame data, news
 - "A Day at the ACES" video + captioned gallery with accessible lightbox
 - Entry journey section and contact form for registering interest
 - Hall of Fame champion spotlight and mobile-friendly year pills
-- Testimonials carousel with pause control
 - Live Instagram profile embed from [@acesnationals](https://www.instagram.com/acesnationals/)
 - Scroll animations, mobile sticky CTA bar, sitemap/robots, and Event JSON-LD
 

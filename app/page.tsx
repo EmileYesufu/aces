@@ -6,7 +6,6 @@ import { Partners, VideoSection } from "@/components/home/Partners";
 import { Gallery } from "@/components/home/Gallery";
 import { EntryJourney } from "@/components/home/EntryJourney";
 import { HallOfFameSpotlight } from "@/components/home/HallOfFameSpotlight";
-import { Testimonials } from "@/components/home/Testimonials";
 import { SocialFeedSection } from "@/components/home/SocialFeed";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -23,7 +22,6 @@ export default function HomePage() {
       <EntryJourney />
       <HallOfFameSpotlight />
       <Partners />
-      <Testimonials />
       <SocialFeedSection />
       <ScrollReveal>
         <CTABanner />
