@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin, Trophy } from "lucide-react";
 import { footerNav, policyLinks, siteConfig } from "@/content/site";
 import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { NewsletterForm } from "@/components/forms/NewsletterForm";
 
 const socialLinks = [
   { label: "Instagram", href: siteConfig.social.instagram, Icon: InstagramIcon },
@@ -17,6 +18,18 @@ export function Footer() {
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mb-12 grid items-center gap-6 rounded-2xl border border-aces-navy-light bg-white/5 p-6 md:grid-cols-2 md:p-8">
+          <div>
+            <h3 className="font-display text-xl font-bold uppercase tracking-tight text-white">
+              Stay in the loop
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed">
+              Get ACES Nationals announcements, entry updates, and tournament news straight to your inbox.
+            </p>
+          </div>
+          <NewsletterForm />
+        </div>
+
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-lg font-semibold text-white">Venue</h3>

@@ -21,6 +21,9 @@ export function Partners() {
               rel="noopener noreferrer"
               className="flex h-full flex-col items-center rounded-xl border border-gray-200 bg-white p-8 text-center transition-all hover:-translate-y-1 hover:border-aces-red/30 hover:shadow-md"
             >
+              <span className="mb-4 inline-flex rounded-full bg-aces-red/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-aces-red">
+                {partner.tier}
+              </span>
               {partner.logo ? (
                 <Image
                   src={partner.logo}
@@ -40,6 +43,22 @@ export function Partners() {
           </ScrollReveal>
         ))}
       </div>
+
+      <ScrollReveal delay={0.1}>
+        <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-surface p-8 text-center">
+          <h3 className="font-display text-xl font-bold uppercase tracking-tight text-aces-navy">
+            Become an ACES Nationals partner
+          </h3>
+          <p className="max-w-2xl text-sm text-aces-muted">
+            Put your brand in front of 400+ elite junior teams and thousands of players, coaches and
+            families from across the country. Get in touch to discuss partnership and sponsorship
+            opportunities.
+          </p>
+          <Button href="/contact?topic=Sponsorship%20enquiries" size="lg">
+            Enquire about partnership
+          </Button>
+        </div>
+      </ScrollReveal>
     </Section>
   );
 }

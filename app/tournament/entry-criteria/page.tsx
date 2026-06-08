@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { FAQ } from "@/components/ui/FAQ";
+import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/ui/CTABanner";
 import {
   entryCriteriaFaqs,
@@ -58,6 +59,17 @@ export default function EntryCriteriaPage() {
           {entryCriteriaNotes.map((note) => (
             <p key={note.slice(0, 40)}>{note}</p>
           ))}
+        </div>
+        <div className="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-surface p-8 text-center">
+          <h3 className="font-display text-lg font-bold uppercase tracking-tight text-aces-navy">
+            Invited team info pack
+          </h3>
+          <p className="text-sm text-aces-muted">
+            Already invited? Download the team info pack with everything you need for tournament day.
+          </p>
+          <Button href="/tournament/info-pack" variant="outline">
+            View the team info pack
+          </Button>
         </div>
       </Section>
 

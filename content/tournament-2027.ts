@@ -5,6 +5,9 @@ export const tournamentDatesConfirmed = false;
 /** Set when schedule dates are confirmed, e.g. new Date("2027-05-29T09:00:00+01:00") */
 export const firstFixtureDate: Date | null = null;
 
+/** Last day of the tournament window. Set alongside firstFixtureDate to enable the live banner. */
+export const lastFixtureDate: Date | null = null;
+
 export const tournamentStats = [
   {
     title: "14 Age groups",
