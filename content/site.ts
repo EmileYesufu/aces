@@ -54,6 +54,7 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "Hall of Fame", href: "/hall-of-fame" },
+  { label: "2026 Gallery", href: "/gallery" },
   { label: "ACES Shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ];

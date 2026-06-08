@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news",
     "/videos",
     "/hall-of-fame",
+    "/gallery",
     "/shop",
     "/contact",
   ].map((path) => ({
