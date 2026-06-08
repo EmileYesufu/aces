@@ -68,6 +68,7 @@ const filters: { id: Filter; label: string }[] = [
 
 export function ScheduleSection() {
   const [filter, setFilter] = useState<Filter>("all");
+  const hasAgeGroups = tournamentSchedule.some((day) => day.ageGroups.length > 0);
 
   const days = useMemo(() => {
     return tournamentSchedule
@@ -78,15 +79,15 @@ export function ScheduleSection() {
           return filter === "girls" ? isGirls(g) : !isGirls(g);
         }),
       }))
-      .filter((day) => day.ageGroups.length > 0);
-  }, [filter]);
+      .filter((day) => !hasAgeGroups || day.ageGroups.length > 0);
+  }, [filter, hasAgeGroups]);
 
   return (
     <Section className="bg-surface bg-pitch-pattern">
       <ScrollReveal>
         <SectionHeader
           title={`${tournamentYear} Tournament Schedule`}
-          subtitle="Four weekends in May & June — dates coming soon · age groups relate to season 2027/28"
+          subtitle="Four weekends in May & June — dates and age groups coming soon · season 2027/28"
           centered
         />
       </ScrollReveal>
@@ -97,28 +98,30 @@ export function ScheduleSection() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <div
-          className="mx-auto mb-10 flex w-full max-w-xs rounded-full border border-aces-navy/15 bg-white p-1"
-          role="group"
-          aria-label="Filter schedule by tournament"
-        >
-          {filters.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              onClick={() => setFilter(f.id)}
-              aria-pressed={filter === f.id}
-              className={cn(
-                "flex-1 rounded-full px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red",
-                filter === f.id ? "bg-aces-red text-white shadow-sm" : "text-aces-navy hover:bg-surface-muted"
-              )}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-      </ScrollReveal>
+      {hasAgeGroups && (
+        <ScrollReveal>
+          <div
+            className="mx-auto mb-10 flex w-full max-w-xs rounded-full border border-aces-navy/15 bg-white p-1"
+            role="group"
+            aria-label="Filter schedule by tournament"
+          >
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setFilter(f.id)}
+                aria-pressed={filter === f.id}
+                className={cn(
+                  "flex-1 rounded-full px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red",
+                  filter === f.id ? "bg-aces-red text-white shadow-sm" : "text-aces-navy hover:bg-surface-muted"
+                )}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+      )}
 
       <div className="relative mx-auto max-w-3xl">
         <div className="absolute left-6 top-0 hidden h-full w-0.5 bg-aces-red/30 md:block" aria-hidden="true" />
@@ -136,11 +139,15 @@ export function ScheduleSection() {
                   </span>
                 </div>
                 <div className="flex-1 rounded-card border border-gray-200 bg-white p-6 shadow-[var(--shadow-card)] transition-all hover:border-aces-red/30 hover:shadow-[var(--shadow-card-hover)]">
-                  <div className="flex flex-wrap gap-2">
-                    {day.ageGroups.map((group) => (
-                      <AgeBadge key={group} group={group} />
-                    ))}
-                  </div>
+                  {day.ageGroups.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {day.ageGroups.map((group) => (
+                        <AgeBadge key={group} group={group} />
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-aces-muted">Age groups coming soon</p>
+                  )}
                   {tournamentDatesConfirmed && (
                     <a
                       href={`data:text/calendar;charset=utf-8,${encodeURIComponent(buildIcs(day))}`}

@@ -41,13 +41,10 @@ export type ScheduleDay = {
 };
 
 export const tournamentSchedule: ScheduleDay[] = [
-  { date: "Coming soon", label: "Weekend 1", ageGroups: ["U10 boys", "U14 boys"] },
-  { date: "Coming soon", label: "Weekend 2", ageGroups: ["U11 boys", "U15 boys"] },
-  { date: "Coming soon", label: "Weekend 2", ageGroups: ["U12 boys", "U16 boys"] },
-  { date: "Coming soon", label: "Weekend 3", ageGroups: ["U12 girls", "U15 girls"] },
-  { date: "Coming soon", label: "Weekend 3", ageGroups: ["U13 girls", "U16 girls"] },
-  { date: "Coming soon", label: "Weekend 4", ageGroups: ["U14 girls", "U18 girls"] },
-  { date: "Coming soon", label: "Weekend 4", ageGroups: ["U13 boys", "U18 boys"] },
+  { date: "Coming soon", label: "Weekend 1", ageGroups: [] },
+  { date: "Coming soon", label: "Weekend 2", ageGroups: [] },
+  { date: "Coming soon", label: "Weekend 3", ageGroups: [] },
+  { date: "Coming soon", label: "Weekend 4", ageGroups: [] },
 ];
 
 export const entryCriteriaFaqs = [

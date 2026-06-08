@@ -52,15 +52,19 @@ export default function AboutPage() {
             </Button>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-aces-navy">Age Groups and Dates</h2>
+            <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-aces-navy">Tournament Weekends</h2>
             <div className="mt-4 h-1 w-16 rounded bg-aces-red" />
-            <ul className="mt-6 space-y-2 capitalize text-aces-muted">
+            <ul className="mt-6 space-y-2 text-aces-muted">
               {tournamentSchedule.map((day) => (
-                <li key={day.label + day.ageGroups.join()}>
-                  <strong className="text-aces-navy">{day.date}</strong> — {day.ageGroups.join(", ")}
+                <li key={day.label}>
+                  <strong className="text-aces-navy">{day.label}</strong> — {day.date}
+                  {day.ageGroups.length > 0 && (
+                    <span className="capitalize"> ({day.ageGroups.join(", ")})</span>
+                  )}
                 </li>
               ))}
             </ul>
+            <p className="mt-4 text-sm text-aces-muted">Age group allocations will be published when confirmed.</p>
           </div>
         </div>
       </Section>

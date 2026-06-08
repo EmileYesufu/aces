@@ -95,11 +95,15 @@ export default function TournamentPage() {
             <Card key={day.label + day.ageGroups.join()}>
               <p className="text-sm font-medium text-aces-red">{day.label}</p>
               <p className="mt-1 text-xl font-bold text-aces-navy">{day.date}</p>
-              <ul className="mt-3 space-y-1 capitalize text-aces-muted">
-                {day.ageGroups.map((g) => (
-                  <li key={g}>{g}</li>
-                ))}
-              </ul>
+              {day.ageGroups.length > 0 ? (
+                <ul className="mt-3 space-y-1 capitalize text-aces-muted">
+                  {day.ageGroups.map((g) => (
+                    <li key={g}>{g}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm text-aces-muted">Age groups coming soon</p>
+              )}
             </Card>
           ))}
         </div>
