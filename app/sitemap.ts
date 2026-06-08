@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { siteConfig, policyLinks } from "@/content/site";
-import { newsPosts } from "@/content/news";
 import { tournamentVideos } from "@/content/videos";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -13,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tournament/about",
     "/tournament/entry-criteria",
     "/tournament/rules",
-    "/news",
     "/videos",
     "/hall-of-fame",
     "/gallery",
@@ -24,13 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1 : 0.7,
-  }));
-
-  const newsRoutes = newsPosts.map((post) => ({
-    url: `${base}/news/${post.slug}`,
-    lastModified: post.date ? new Date(post.date) : now,
-    changeFrequency: "yearly" as const,
-    priority: 0.5,
   }));
 
   const videoRoutes = tournamentVideos.map((video) => ({
@@ -47,5 +38,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  return [...staticRoutes, ...newsRoutes, ...videoRoutes, ...policyRoutes];
+  return [...staticRoutes, ...videoRoutes, ...policyRoutes];
 }

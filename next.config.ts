@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
         destination: "/contact",
         permanent: true,
       },
+      {
+        source: "/news",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/news/:slug",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   images: {

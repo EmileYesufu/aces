@@ -70,8 +70,6 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 | `/tournament/entry-criteria` | Entry criteria and FAQs |
 | `/tournament/rules` | Tournament rules |
 | `/tournament/about` | About ACES Nationals and heritage timeline |
-| `/news` | News listing |
-| `/news/[slug]` | News article detail |
 | `/videos` | Tournament video hub |
 | `/videos/[year]` | Individual video embed (2022–2025) |
 | `/hall-of-fame` | Winners archive 2009–2026 (filterable) |
@@ -82,7 +80,7 @@ Remote: `https://github.com/EmileYesufu/aces.git`
 
 ## Content
 
-Static content lives in `content/` — tournament dates, Hall of Fame data, news posts, policies, and site config. Update these files to change copy without touching components.
+Static content lives in `content/` — tournament dates, Hall of Fame data, policies, and site config. Update these files to change copy without touching components.
 
 ## Brand colours
 

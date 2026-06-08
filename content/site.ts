@@ -47,7 +47,6 @@ export const mainNav: NavItem[] = [
       { label: "About us", href: "/tournament/about" },
     ],
   },
-  { label: "News", href: "/news" },
   {
     label: "Tournament Videos",
     href: "/videos",
