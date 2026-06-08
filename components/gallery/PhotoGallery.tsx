@@ -17,7 +17,8 @@ export function PhotoGallery({ photos, year }: PhotoGalleryProps) {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
-  const touchStartX = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const didSwipe = useRef(false);
 
   const items = photos.map((photo, index) => ({
     src: photo.src,
@@ -48,6 +49,8 @@ export function PhotoGallery({ photos, year }: PhotoGalleryProps) {
   useEffect(() => {
     if (lightbox === null) return;
     closeBtnRef.current?.focus();
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -62,8 +65,40 @@ export function PhotoGallery({ photos, year }: PhotoGalleryProps) {
       }
     };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [lightbox, close, goPrev, goNext]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    didSwipe.current = false;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStart.current) return;
+      const dx = touchStart.current.x - e.changedTouches[0].clientX;
+      const dy = touchStart.current.y - e.changedTouches[0].clientY;
+      touchStart.current = null;
+
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) <= Math.abs(dy)) return;
+
+      didSwipe.current = true;
+      if (dx > 0) goNext();
+      else goPrev();
+    },
+    [goNext, goPrev]
+  );
+
+  const handleBackdropClick = useCallback(() => {
+    if (didSwipe.current) {
+      didSwipe.current = false;
+      return;
+    }
+    close();
+  }, [close]);
 
   if (photos.length === 0) {
     return (
@@ -112,8 +147,10 @@ export function PhotoGallery({ photos, year }: PhotoGalleryProps) {
       {lightbox !== null && (
         <div
           ref={dialogRef}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4"
-          onClick={close}
+          className="fixed inset-0 z-[60] flex touch-none items-center justify-center bg-black/90 p-4"
+          onClick={handleBackdropClick}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-label={`Image ${lightbox + 1} of ${items.length}: ${items[lightbox].alt}`}
@@ -122,71 +159,53 @@ export function PhotoGallery({ photos, year }: PhotoGalleryProps) {
             ref={closeBtnRef}
             type="button"
             onClick={close}
-            className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="absolute right-4 top-4 z-20 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             aria-label="Close lightbox"
           >
             <X className="h-6 w-6" aria-hidden="true" />
           </button>
 
-          {lightbox > 0 && (
+          <div
+            className="relative z-10 flex w-full max-w-6xl items-center gap-2 sm:gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                goPrev();
-              }}
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:left-4 sm:p-3"
+              onClick={goPrev}
+              disabled={lightbox === 0}
+              className="hidden shrink-0 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block sm:p-3"
               aria-label="Previous photo"
             >
-              <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" aria-hidden="true" />
+              <ChevronLeft className="h-8 w-8" aria-hidden="true" />
             </button>
-          )}
 
-          {lightbox < items.length - 1 && (
+            <div className="min-w-0 flex-1 select-none">
+              <Image
+                key={items[lightbox].src}
+                src={items[lightbox].src}
+                alt={items[lightbox].alt}
+                width={1200}
+                height={900}
+                className="pointer-events-none mx-auto max-h-[85vh] w-auto rounded-lg object-contain"
+                draggable={false}
+              />
+              <p className="mt-3 text-center text-sm text-gray-400">
+                {lightbox + 1} / {items.length}
+              </p>
+              {items[lightbox].caption && (
+                <p className="mt-1 text-center text-sm text-gray-300">{items[lightbox].caption}</p>
+              )}
+            </div>
+
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                goNext();
-              }}
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-4 sm:p-3"
+              onClick={goNext}
+              disabled={lightbox === items.length - 1}
+              className="hidden shrink-0 rounded-full bg-white/15 p-2 text-white hover:bg-white/25 disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block sm:p-3"
               aria-label="Next photo"
             >
-              <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" aria-hidden="true" />
+              <ChevronRight className="h-8 w-8" aria-hidden="true" />
             </button>
-          )}
-
-          <div
-            className="relative max-h-[85vh] max-w-5xl touch-pan-y"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={(e) => {
-              touchStartX.current = e.touches[0].clientX;
-            }}
-            onTouchEnd={(e) => {
-              if (touchStartX.current === null) return;
-              const diff = touchStartX.current - e.changedTouches[0].clientX;
-              if (Math.abs(diff) > SWIPE_THRESHOLD) {
-                if (diff > 0) goNext();
-                else goPrev();
-              }
-              touchStartX.current = null;
-            }}
-          >
-            <Image
-              key={items[lightbox].src}
-              src={items[lightbox].src}
-              alt={items[lightbox].alt}
-              width={1200}
-              height={900}
-              className="max-h-[85vh] w-auto rounded-lg object-contain"
-              draggable={false}
-            />
-            <p className="mt-3 text-center text-sm text-gray-400">
-              {lightbox + 1} / {items.length}
-            </p>
-            {items[lightbox].caption && (
-              <p className="mt-1 text-center text-sm text-gray-300">{items[lightbox].caption}</p>
-            )}
           </div>
         </div>
       )}
