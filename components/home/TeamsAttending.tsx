@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import { Globe, MapPin, Calendar, Users } from "lucide-react";
+import { MapPin, Calendar, Users } from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { hallOfFame } from "@/content/hall-of-fame";
@@ -21,7 +21,6 @@ const stats = (townCount: number) => [
   { icon: MapPin, value: `${townCount}+`, label: "Towns & cities" },
   { icon: Calendar, value: "2009", label: "Established" },
   { icon: Users, value: "400+", label: "Teams each year" },
-  { icon: Globe, value: "Intl", label: "Teams welcome" },
 ];
 
 function MarqueeRow({ towns, paused }: { towns: string[]; paused: boolean }) {
@@ -66,7 +65,7 @@ export function TeamsAttending() {
       </ScrollReveal>
 
       <ScrollReveal delay={0.08}>
-        <div className="mb-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {stats(towns.length).map(({ icon: Icon, value, label }) => (
             <div
               key={label}
@@ -82,13 +81,6 @@ export function TeamsAttending() {
 
       <ScrollReveal delay={0.12}>
         <MarqueeRow towns={towns} paused={!!reducedMotion} />
-      </ScrollReveal>
-
-      <ScrollReveal delay={0.15}>
-        <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-gray-300">
-          <Globe className="h-4 w-4 text-aces-red-bright" aria-hidden="true" />
-          International teams are welcome to apply each year
-        </p>
       </ScrollReveal>
     </Section>
   );
