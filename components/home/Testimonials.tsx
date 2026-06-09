@@ -28,19 +28,18 @@ export function Testimonials() {
   const current = testimonials[active];
 
   return (
-    <Section className="bg-aces-navy text-white">
+    <Section className="bg-surface bg-pitch-pattern">
       <ScrollReveal>
         <SectionHeader
           title="What Teams Say"
           subtitle="400+ teams from towns and cities across the UK — hear from managers and coaches"
           centered
-          light
         />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
         <div className="mx-auto max-w-3xl text-center" aria-roledescription="carousel" aria-label="Testimonials">
-          <Quote className="mx-auto h-10 w-10 text-aces-red-bright opacity-80" aria-hidden="true" />
-          <blockquote className="mt-6 text-xl leading-relaxed text-gray-100 md:text-2xl">
+          <Quote className="mx-auto h-10 w-10 text-aces-red" aria-hidden="true" />
+          <blockquote className="mt-6 text-xl leading-relaxed text-aces-navy md:text-2xl">
             &ldquo;{current.quote}&rdquo;
           </blockquote>
           <figcaption ref={liveRef} aria-live="polite" className="mt-8 flex items-center justify-center gap-3">
@@ -51,8 +50,8 @@ export function Testimonials() {
               {initials(current.club)}
             </span>
             <span className="text-left">
-              <span className="block font-semibold text-white">{current.author}</span>
-              <span className="block text-sm text-gray-300">
+              <span className="block font-semibold text-aces-navy">{current.author}</span>
+              <span className="block text-sm text-aces-muted">
                 {current.role} · {current.club}
               </span>
             </span>
@@ -66,8 +65,8 @@ export function Testimonials() {
                   onClick={() => setActive(i)}
                   aria-label={`Show testimonial from ${t.club}`}
                   aria-pressed={i === active}
-                  className={`h-2 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                    i === active ? "w-8 bg-aces-red-bright" : "w-2 bg-white/30 hover:bg-white/50"
+                  className={`h-2 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red ${
+                    i === active ? "w-8 bg-aces-red" : "w-2 bg-aces-navy/15 hover:bg-aces-navy/25"
                   }`}
                 />
               ))}
@@ -76,7 +75,7 @@ export function Testimonials() {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? "Resume testimonials" : "Pause testimonials"}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 text-gray-300 transition-colors hover:border-white/50 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-aces-navy/15 text-aces-muted transition-colors hover:border-aces-navy/30 hover:text-aces-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aces-red"
             >
               {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
             </button>

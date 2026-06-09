@@ -70,21 +70,20 @@ export function Footer() {
             <p className="mb-4 text-sm leading-relaxed">
               Keep up with the ACES Nationals on social media — highlights, news, and tournament updates.
             </p>
-            <ul className="space-y-3">
+            <div className="flex items-center gap-3">
               {socialLinks.map(({ label, href, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 transition-colors hover:text-white"
-                  >
-                    <Icon className="h-5 w-5 shrink-0 text-aces-red-bright" aria-hidden="true" />
-                    {label}
-                  </a>
-                </li>
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="rounded-full bg-white/10 p-3 text-gray-300 transition-colors hover:bg-aces-red hover:text-white"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 

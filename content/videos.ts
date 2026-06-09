@@ -63,3 +63,10 @@ export function getVideoThumbnail(video: Pick<TournamentVideo, "provider" | "vid
   }
   return `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`;
 }
+
+export function getVideoThumbnailFallback(video: Pick<TournamentVideo, "provider" | "videoId">) {
+  if (video.provider === "vimeo") {
+    return `https://vumbnail.com/${video.videoId}.jpg`;
+  }
+  return `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+}

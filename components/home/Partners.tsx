@@ -80,11 +80,12 @@ export function VideoSection() {
           </div>
         </ScrollReveal>
         <ScrollReveal delay={0.15}>
-          <div className="aspect-video overflow-hidden rounded-xl bg-black/40 shadow-2xl ring-1 ring-white/10">
+          <div className="relative aspect-video overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
             <VideoEmbed
               provider={featuredVideo.provider}
               id={featuredVideo.videoId}
               title={featuredVideo.title}
+              className="absolute inset-0 h-full w-full"
             />
           </div>
         </ScrollReveal>
