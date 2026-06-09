@@ -92,7 +92,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Aces. All rights reserved.{" "}
             <span className="text-gray-500">&middot;</span>{" "}
             <a
-              href="https://eyhddigital.com"
+              href="https://www.eyhdigital.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
